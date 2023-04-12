@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:home_hub/screens/sign_in_screen.dart';
 import 'package:home_hub/screens/walk_through_screen.dart';
 import 'package:home_hub/utils/images.dart';
 
@@ -22,7 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => WalkThroughScreen()),
+          // MaterialPageRoute(builder: (context) => WalkThroughScreen()),
+          MaterialPageRoute(builder: (context) => SignInScreen()),
+
           (route) => false,
         );
       },

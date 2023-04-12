@@ -72,7 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Space(60),
+                  Space(30),
                   Text("RenTa!",
                       style: TextStyle(
                           fontSize: mainTitleTextSize,
@@ -82,10 +82,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: TextStyle(fontSize: 14, color: subTitle)),
                   Space(16),
                   Image.asset(splash_logo,
-                      width: 100, height: 100, fit: BoxFit.cover),
+                      width: 150, height: 150, fit: BoxFit.cover),
                 ],
               ),
-              Space(70),
+              Space(30),
               Form(
                   key: _loginFormKey,
                   child: Column(
@@ -189,6 +189,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               }
                             else
                               {
+                                appData.setUser(value),
                                 showTopSnackBar(
                                   Overlay.of(context),
                                   const CustomSnackBar.success(

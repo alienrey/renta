@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:home_hub/screens/sign_in_screen.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -114,6 +115,7 @@ class MyApp extends StatelessWidget {
             ),
             themeMode: appData.mode,
             home: SplashScreen(),
+            // home: SignInScreen(),
           ),
         );
       },

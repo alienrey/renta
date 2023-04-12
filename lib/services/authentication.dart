@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:home_hub/models/User.dart';
 
 class FirebaseAuthService {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -24,6 +25,7 @@ class FirebaseAuthService {
           'lastName': lastName,
           'email': email,
           'phoneNumber': phoneNumber,
+          'profilePicture': 'https://kansai-resilience-forum.jp/wp-content/uploads/2019/02/IAFOR-Blank-Avatar-Image-1-800x800.jpg'
           // Add more fields as needed
         });
       }
@@ -35,14 +37,12 @@ class FirebaseAuthService {
   }
 
   // Sign in with email and password
-  static Future<UserCredential?> signIn({
-    required String email, 
-    required String password
-  }) async {
+  static Future<UserData?> signIn({required String email, required String password}) async {
     try {
-      UserCredential userCredential = await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
-      return userCredential;
+      UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      DocumentSnapshot snapshot = await _firestore.collection('users').doc(userCredential.user?.uid).get();
+      UserData user = UserData.fromDocumentSnapshot(snapshot);
+      return user;
     } on FirebaseAuthException catch (e) {
       print('Failed to sign in with email and password: ${e.message}');
       return null;

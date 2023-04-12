@@ -6,11 +6,13 @@ import 'package:home_hub/components/home_contruction_component.dart';
 import 'package:home_hub/components/home_service_component.dart';
 import 'package:home_hub/components/popular_service_component.dart';
 import 'package:home_hub/components/renovate_home_component.dart';
+import 'package:home_hub/components/search_component.dart';
 import 'package:home_hub/fragments/bookings_fragment.dart';
 import 'package:home_hub/models/customer_details_model.dart';
 import 'package:home_hub/screens/notification_screen.dart';
 import 'package:home_hub/screens/service_providers_screen.dart';
 import 'package:home_hub/screens/sign_in_screen.dart';
+import 'package:home_hub/services/authentication.dart';
 import 'package:home_hub/utils/images.dart';
 import 'package:home_hub/utils/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -65,7 +67,8 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
             TextButton(
               child: Text('Yes'),
-              onPressed: () {
+              onPressed: () async {
+                await FirebaseAuthService.signOut();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => SignInScreen()),
@@ -222,150 +225,22 @@ class _HomeFragmentState extends State<HomeFragment> {
                   keyboardType: TextInputType.name,
                   style: TextStyle(fontSize: 17),
                   decoration: commonInputDecoration(
-                    suffixIcon: Icon(Icons.search, size: 20, color: appData.isDark ? Colors.white : Colors.black),
                     hintText: "Search for services",
+                    suffixIcon: Icon(Icons.search, size: 18),
                   ),
                 ),
               ),
             ),
-            Space(16),
-            SizedBox(
-              height: 170,
-              child: PageView.builder(
-                controller: offerPagesController,
-                itemCount: bannerList.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index)),
-                      );
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(bannerList[index], fit: BoxFit.cover),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            SmoothPageIndicator(
-              controller: offerPagesController,
-              count: 3,
-              effect: ExpandingDotsEffect(
-                dotHeight: 7,
-                dotWidth: 8,
-                activeDotColor: appData.isDark ? Colors.white : Colors.black,
-                expansionFactor: 2.2,
-              ),
-            ),
-            Space(8),
-            homeTitleWidget(
-              titleText: "Home Services",
-              onAllTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AllCategoriesScreen(list: serviceProviders, fromProviderDetails: false),
-                  ),
-                );
+            ListView.builder(
+              shrinkWrap: true,
+              primary: false,
+              padding: EdgeInsets.all(8),
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: serviceProviders.length,
+              itemBuilder: (context, index) {
+                return SearchComponent(index, servicesModel: serviceProviders[index]);
               },
-            ),
-            HomeServiceComponent(),
-            Space(16),
-            homeTitleWidget(
-              titleText: "Home Construction",
-              onAllTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AllCategoriesScreen(list: serviceProviders, fromProviderDetails: false),
-                  ),
-                );
-              },
-            ),
-            HomeConstructionComponent(),
-            Space(16),
-            homeTitleWidget(
-              titleText: "Popular Services",
-              onAllTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AllCategoriesScreen(list: serviceProviders, fromProviderDetails: false),
-                  ),
-                );
-              },
-            ),
-            Space(4),
-            PopularServiceComponent(),
-            Space(24),
-            homeTitleWidget(
-              titleText: "Renovate your home",
-              onAllTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AllCategoriesScreen(list: serviceProviders, fromProviderDetails: false),
-                  ),
-                );
-              },
-            ),
-            Space(4),
-            RenovateHomeComponent(),
-            Space(24),
-            homeTitleWidget(
-              titleText: "Combos And Subscriptions",
-              onAllTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AllCategoriesScreen(list: serviceProviders, fromProviderDetails: false),
-                  ),
-                );
-              },
-            ),
-            Space(4),
-            CombosSubscriptionsComponent(),
-            Space(32),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  "What our customers say",
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
-                ),
-              ),
-            ),
-            Space(16),
-            SizedBox(
-              height: 117,
-              child: PageView.builder(
-                itemCount: customerReviews.length,
-                controller: reviewPagesController,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return CustomerReviewComponent(customerReviewModel: customerReviews[index]);
-                },
-              ),
-            ),
-            Space(16),
-            SmoothPageIndicator(
-              controller: reviewPagesController,
-              count: customerReviews.length,
-              effect: ScaleEffect(
-                dotHeight: 7,
-                dotWidth: 7,
-                activeDotColor: appData.isDark ? Colors.white : activeDotColor,
-                dotColor: Colors.grey.withOpacity(0.2),
-              ),
-            ),
-            Space(16),
+            )
           ],
         ),
       ),
