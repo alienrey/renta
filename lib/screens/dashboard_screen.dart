@@ -16,7 +16,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   final _pageItem = [
     HomeFragment(),
-    // SearchFragment(),
+    SearchFragment(),
     BookingsFragment(fromProfile: false),
     AccountFragment(),
   ];
@@ -57,20 +57,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 activeIcon: Icon(Icons.home_rounded, size: 20),
                 label: "Home",
               ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.account_balance_wallet_outlined, size: 20),
-              //   activeIcon: Icon(Icons.account_balance_wallet, size: 20),
-              //   label: "Search",
-              // ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month_outlined, size: 20),
-                activeIcon: Icon(Icons.calendar_month_outlined, size: 20),
-                label: "Bookings",
+                icon: Icon(Icons.create_outlined, size: 20),
+                activeIcon: Icon(Icons.create, size: 20),
+                label: "Create",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list, size: 20),
+                activeIcon: Icon(Icons.list_outlined, size: 20),
+                label: "Listings",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline, size: 20),
                 activeIcon: Icon(Icons.person, size: 20),
-                label: "Account",
+                label: "Profile",
               ),
             ],
             currentIndex: _selectedItem,

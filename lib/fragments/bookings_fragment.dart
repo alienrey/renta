@@ -39,7 +39,7 @@ class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerPr
           ),
         ),
         title: Text(
-          "Bookings",
+          "Listings",
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
         ),
@@ -48,8 +48,8 @@ class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerPr
           labelStyle: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
           indicatorColor: blackColor,
           tabs: [
-            Tab(text: "Active"),
-            Tab(text: "History"),
+            Tab(text: "Rentals"),
+            Tab(text: "My Rentals"),
           ],
         ),
       ),

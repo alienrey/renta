@@ -157,53 +157,53 @@ class _HomeFragmentState extends State<HomeFragment> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfileScreen()));
               },
             ),
-            drawerWidget(
-              drawerTitle: "My Favourites",
-              drawerIcon: Icons.favorite,
-              drawerOnTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => FavouriteProvidersScreen()));
-              },
-            ),
-            drawerWidget(
-              drawerTitle: "Notifications",
-              drawerIcon: Icons.notifications,
-              drawerOnTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
-              },
-            ),
-            drawerWidget(
-              drawerTitle: "My bookings",
-              drawerIcon: Icons.calendar_month,
-              drawerOnTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BookingsFragment(fromProfile: true)),
-                );
-              },
-            ),
-            drawerWidget(
-              drawerTitle: "Refer and earn",
-              drawerIcon: Icons.paid_rounded,
-              drawerOnTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            drawerWidget(
-              drawerTitle: "Contact Us",
-              drawerIcon: Icons.mail,
-              drawerOnTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            drawerWidget(
-              drawerTitle: "Help Center",
-              drawerIcon: Icons.question_mark_rounded,
-              drawerOnTap: () {
-                Navigator.pop(context);
-              },
-            ),
+            // drawerWidget(
+            //   drawerTitle: "My Favourites",
+            //   drawerIcon: Icons.favorite,
+            //   drawerOnTap: () {
+            //     Navigator.pop(context);
+            //     Navigator.push(context, MaterialPageRoute(builder: (context) => FavouriteProvidersScreen()));
+            //   },
+            // ),
+            // drawerWidget(
+            //   drawerTitle: "Notifications",
+            //   drawerIcon: Icons.notifications,
+            //   drawerOnTap: () {
+            //     Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
+            //   },
+            // ),
+            // drawerWidget(
+            //   drawerTitle: "My bookings",
+            //   drawerIcon: Icons.calendar_month,
+            //   drawerOnTap: () {
+            //     Navigator.pop(context);
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => BookingsFragment(fromProfile: true)),
+            //     );
+            //   },
+            // ),
+            // drawerWidget(
+            //   drawerTitle: "Refer and earn",
+            //   drawerIcon: Icons.paid_rounded,
+            //   drawerOnTap: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
+            // drawerWidget(
+            //   drawerTitle: "Contact Us",
+            //   drawerIcon: Icons.mail,
+            //   drawerOnTap: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
+            // drawerWidget(
+            //   drawerTitle: "Help Center",
+            //   drawerIcon: Icons.question_mark_rounded,
+            //   drawerOnTap: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
             drawerWidget(
               drawerTitle: "Logout",
               drawerIcon: Icons.logout,

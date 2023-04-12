@@ -22,7 +22,7 @@ class _SearchFragmentState extends State<SearchFragment> {
         elevation: 0,
         backgroundColor: transparent,
         title: Text(
-          "Search",
+          "Create Listing",
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
         ),

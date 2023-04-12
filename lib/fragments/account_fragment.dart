@@ -90,35 +90,35 @@ class _AccountFragmentState extends State<AccountFragment> {
                     MaterialPageRoute(builder: (context) => MyProfileScreen()));
               },
             ),
-            ListTile(
-              horizontalTitleGap: 4,
-              contentPadding: EdgeInsets.symmetric(horizontal: 16),
-              leading: Icon(Icons.favorite, size: 20),
-              title: Text("My Favourites", style: TextStyle()),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FavouriteProvidersScreen()));
-              },
-            ),
-            ListTile(
-              horizontalTitleGap: 4,
-              contentPadding: EdgeInsets.symmetric(horizontal: 16),
-              leading: Icon(Icons.notifications, size: 20),
-              title: Text("Notifications"),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NotificationScreen()));
-              },
-            ),
+            // ListTile(
+            //   horizontalTitleGap: 4,
+            //   contentPadding: EdgeInsets.symmetric(horizontal: 16),
+            //   leading: Icon(Icons.favorite, size: 20),
+            //   title: Text("My Favourites", style: TextStyle()),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => FavouriteProvidersScreen()));
+            //   },
+            // ),
+            // ListTile(
+            //   horizontalTitleGap: 4,
+            //   contentPadding: EdgeInsets.symmetric(horizontal: 16),
+            //   leading: Icon(Icons.notifications, size: 20),
+            //   title: Text("Notifications"),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => NotificationScreen()));
+            //   },
+            // ),
             ListTile(
               horizontalTitleGap: 4,
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
               leading: Icon(Icons.calendar_month, size: 20),
-              title: Text("My bookings"),
+              title: Text("My Rentals"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -127,15 +127,15 @@ class _AccountFragmentState extends State<AccountFragment> {
                             BookingsFragment(fromProfile: true)));
               },
             ),
-            ListTile(
-              horizontalTitleGap: 4,
-              contentPadding: EdgeInsets.symmetric(horizontal: 16),
-              leading: Icon(Icons.paid_rounded, size: 20),
-              title: Text("Refer and earn"),
-              onTap: () {
-                //
-              },
-            ),
+            // ListTile(
+            //   horizontalTitleGap: 4,
+            //   contentPadding: EdgeInsets.symmetric(horizontal: 16),
+            //   leading: Icon(Icons.paid_rounded, size: 20),
+            //   title: Text("Refer and earn"),
+            //   onTap: () {
+            //     //
+            //   },
+            // ),
             ListTile(
               horizontalTitleGap: 4,
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -157,8 +157,8 @@ class _AccountFragmentState extends State<AccountFragment> {
             ListTile(
               horizontalTitleGap: 4,
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
-              leading: Icon(Icons.local_offer, size: 20),
-              title: Text("Offers And Coupons"),
+              leading: Icon(Icons.logout, size: 20),
+              title: Text("Log Out"),
               onTap: () {
                 //
               },

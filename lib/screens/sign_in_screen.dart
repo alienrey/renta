@@ -72,17 +72,24 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Space(30),
+                  // Text("RenTa!",
+                  //     style: TextStyle(
+                  //         fontSize: mainTitleTextSize,
+                  //         fontWeight: FontWeight.bold)),
                   Space(30),
-                  Text("RenTa!",
-                      style: TextStyle(
-                          fontSize: mainTitleTextSize,
-                          fontWeight: FontWeight.bold)),
-                  Space(8),
-                  Text("Sharing is Caring.",
-                      style: TextStyle(fontSize: 14, color: subTitle)),
-                  Space(16),
-                  Image.asset(splash_logo,
-                      width: 150, height: 150, fit: BoxFit.cover),
+                  Container(
+                    margin: EdgeInsets.only(left: 15.0), // Adjust the value of left margin as needed
+                    child: Image.asset(
+                      splash_logo,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Text("Why buy when you can borrow",
+                      style: TextStyle(fontSize: 12, color: subTitle)),
+                  Space(25),
                 ],
               ),
               Space(30),
