@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
-import '../models/User.dart';
+import '../models/renta/User.dart';
 
 part 'appData.g.dart';
 

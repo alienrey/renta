@@ -3,14 +3,14 @@ import 'package:home_hub/models/last_bookings_model.dart';
 import 'package:home_hub/screens/dashboard_screen.dart';
 import 'package:home_hub/utils/colors.dart';
 
-InputDecoration commonInputDecoration({String? hintText, Widget? prefixIcon, Widget? suffixIcon}) {
+InputDecoration commonInputDecoration({ String? hintText, Widget? prefixIcon, Widget? suffixIcon}) {
   return InputDecoration(
     filled: true,
     fillColor: textFieldColor,
     hintText: hintText,
     prefixIcon: prefixIcon,
     suffixIcon: suffixIcon,
-    hintStyle: TextStyle(color: hintTextColor, fontSize: 16),
+    hintStyle: TextStyle(color: paymentCardBorderDark.withOpacity(0.7), fontSize: 16),
     contentPadding: EdgeInsets.symmetric(horizontal: 16),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide.none),
   );

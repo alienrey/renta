@@ -53,13 +53,14 @@ class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerPr
           ],
         ),
       ),
-      body: TabBarView(
-        controller: bookingTabController,
-        children: [
-          ActiveBookingsScreen(),
-          BookingHistoryScreen(),
-        ],
-      ),
+      // body: TabBarView(
+      //   controller: bookingTabController,
+      //   children: [
+      //     ActiveBookingsScreen(),
+      //     BookingHistoryScreen(),
+      //   ],
+      // ),
+      body: Center(child: Text("Under Construction..."),)
     );
   }
 }

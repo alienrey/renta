@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:home_hub/models/User.dart';
+import 'package:flutter/material.dart';
+import 'package:home_hub/models/renta/User.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class FirebaseAuthService {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -8,6 +11,7 @@ class FirebaseAuthService {
 
   // Sign up with email and password
   static Future<UserCredential?> signUp({
+    required BuildContext context,
     required String email,
     required String password,
     required String firstName,
@@ -32,12 +36,18 @@ class FirebaseAuthService {
       return userCredential;
     } on FirebaseAuthException catch (e) {
       print('Failed to sign up with email and password: ${e.message}');
+      showTopSnackBar(
+        Overlay.of(context),
+        CustomSnackBar.error(
+          message: "${e.message}",
+        )
+      );
       return null;
     }
   }
 
   // Sign in with email and password
-  static Future<UserData?> signIn({required String email, required String password}) async {
+  static Future<UserData?> signIn({required BuildContext context, required String email, required String password}) async {
     try {
       UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       DocumentSnapshot snapshot = await _firestore.collection('users').doc(userCredential.user?.uid).get();
@@ -45,6 +55,12 @@ class FirebaseAuthService {
       return user;
     } on FirebaseAuthException catch (e) {
       print('Failed to sign in with email and password: ${e.message}');
+      showTopSnackBar(
+        Overlay.of(context),
+        CustomSnackBar.error(
+          message: "${e.message}",
+        )
+      );
       return null;
     }
   }

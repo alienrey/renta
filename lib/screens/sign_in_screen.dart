@@ -179,21 +179,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       print(password);
 
                       await FirebaseAuthService.signIn(
+                        context: context,
                         email: email,
                         password: password,
                       ).then((value) => {
                             context.loaderOverlay.hide(),
                             
                             if (value == null)
-                              {
-                                showTopSnackBar(
-                                  Overlay.of(context),
-                                  const CustomSnackBar.error(
-                                    message:
-                                        'Unable to log in!',
-                                  ),
-                                ),
-                              }
+                              {}
                             else
                               {
                                 appData.setUser(value),

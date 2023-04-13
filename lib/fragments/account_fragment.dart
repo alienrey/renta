@@ -6,6 +6,8 @@ import 'package:home_hub/models/customer_details_model.dart';
 import 'package:home_hub/screens/favourite_services_screen.dart';
 import 'package:home_hub/screens/my_profile_screen.dart';
 import 'package:home_hub/screens/notification_screen.dart';
+import 'package:home_hub/screens/sign_in_screen.dart';
+import 'package:home_hub/services/authentication.dart';
 import 'package:home_hub/utils/colors.dart';
 import 'package:home_hub/utils/images.dart';
 
@@ -19,6 +21,42 @@ class AccountFragment extends StatefulWidget {
 }
 
 class _AccountFragmentState extends State<AccountFragment> {
+
+    Future<void> _showLogOutDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Are you sure you want to Logout?',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Yes'),
+              onPressed: () async {
+                await FirebaseAuthService.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInScreen()),
+                  (route) => false,
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,30 +71,15 @@ class _AccountFragmentState extends State<AccountFragment> {
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
         ),
                 actions: [
-          IconButton(
-            icon: Icon(Icons.notifications, size: 22),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NotificationScreen()),
-              );
-            },
-          ),
-          Observer(
-            builder: (context) {
-              return Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Switch(
-                  value: appData.isDark,
-                  onChanged: (value) {
-                    setState(() {
-                      appData.toggle();
-                    });
-                  },
-                ),
-              );
-            },
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.notifications, size: 22),
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => NotificationScreen()),
+          //     );
+          //   },
+          // ),
         ],
       ),
       body: SingleChildScrollView(
@@ -86,8 +109,8 @@ class _AccountFragmentState extends State<AccountFragment> {
               title: Text("My Profile"),
               trailing: Icon(Icons.edit, size: 16),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyProfileScreen()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => MyProfileScreen()));
               },
             ),
             // ListTile(
@@ -160,7 +183,7 @@ class _AccountFragmentState extends State<AccountFragment> {
               leading: Icon(Icons.logout, size: 20),
               title: Text("Log Out"),
               onTap: () {
-                //
+                _showLogOutDialog();
               },
             ),
             Space(16),

@@ -23,7 +23,27 @@ List<ServiceProviderModel> getPlumbers() {
   List<ServiceProviderModel> list = List.empty(growable: true);
   list.add(ServiceProviderModel(
     0,
-    "Michel smith",
+    "Iphone ",
+    plumber,
+    "Plumbers",
+    "3.5",
+    "Plumbers install and repair plumbing systems in residential and commercial properties. They also install fixtures and domestic appliances associated with heating, cooling, and sanitation systems.Plumbers install and repair plumbing systems in residential and commercial properties.",
+    "120",
+    "330",
+    false,
+    getProviderServices(),
+  ));
+  list.add(ServiceProviderModel(0, "Michel John", homeCleaner, "Home Clean", "3.5", "Hi", "120", "350", false, getProviderServices()));
+  list.add(ServiceProviderModel(0, "John carter", plumber, "Plumbers", "4.5", "Hi", "120", "250", false, getProviderServices()));
+  list.add(ServiceProviderModel(0, "Sammy jaine", electrician, "Electrician", "4.0", "Hi", "120", "310", false, getProviderServices()));
+  return list;
+}
+
+List<ServiceProviderModel> getRentalsFake() {
+  List<ServiceProviderModel> list = List.empty(growable: true);
+  list.add(ServiceProviderModel(
+    0,
+    "Iphone ",
     plumber,
     "Plumbers",
     "3.5",

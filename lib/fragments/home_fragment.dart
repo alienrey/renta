@@ -9,7 +9,10 @@ import 'package:home_hub/components/renovate_home_component.dart';
 import 'package:home_hub/components/search_component.dart';
 import 'package:home_hub/fragments/bookings_fragment.dart';
 import 'package:home_hub/models/customer_details_model.dart';
+import 'package:home_hub/models/renta/Rentals.dart';
 import 'package:home_hub/screens/notification_screen.dart';
+import 'package:home_hub/screens/provider_detail_screen.dart';
+import 'package:home_hub/screens/provider_services_screen.dart';
 import 'package:home_hub/screens/service_providers_screen.dart';
 import 'package:home_hub/screens/sign_in_screen.dart';
 import 'package:home_hub/services/authentication.dart';
@@ -27,6 +30,7 @@ import '../screens/my_profile_screen.dart';
 import '../utils/colors.dart';
 
 class HomeFragment extends StatefulWidget {
+  final index = 0;
   const HomeFragment({Key? key}) : super(key: key);
 
   @override
@@ -37,14 +41,29 @@ class _HomeFragmentState extends State<HomeFragment> {
   double aspectRatio = 0.0;
   List<String> bannerList = [banner1, banner2, banner];
 
-  final offerPagesController = PageController(viewportFraction: 0.93, keepPage: true, initialPage: 1);
-  final reviewPagesController = PageController(viewportFraction: 0.93, keepPage: true, initialPage: 1);
+  final offerPagesController =
+      PageController(viewportFraction: 0.93, keepPage: true, initialPage: 1);
+  final reviewPagesController =
+      PageController(viewportFraction: 0.93, keepPage: true, initialPage: 1);
 
   @override
   void dispose() {
     offerPagesController.dispose();
     reviewPagesController.dispose();
     super.dispose();
+  }
+
+  Future<void> _navigateToProviderDetailScreen(int index) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            ProviderDetailScreen(serviceIndex: widget.index, index: index),
+      ),
+    );
+    if (result) {
+      setState(() {});
+    }
   }
 
   Future<void> _showLogOutDialog() async {
@@ -91,30 +110,30 @@ class _HomeFragmentState extends State<HomeFragment> {
         backgroundColor: transparent,
         iconTheme: IconThemeData(size: 30),
         actions: [
-          IconButton(
-            icon: Icon(Icons.notifications, size: 22),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NotificationScreen()),
-              );
-            },
-          ),
-          Observer(
-            builder: (context) {
-              return Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Switch(
-                  value: appData.isDark,
-                  onChanged: (value) {
-                    setState(() {
-                      appData.toggle();
-                    });
-                  },
-                ),
-              );
-            },
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.notifications, size: 22),
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => NotificationScreen()),
+          //     );
+          //   },
+          // ),
+          // Observer(
+          //   builder: (context) {
+          //     return Padding(
+          //       padding: EdgeInsets.all(10.0),
+          //       child: Switch(
+          //         value: appData.isDark,
+          //         onChanged: (value) {
+          //           setState(() {
+          //             appData.toggle();
+          //           });
+          //         },
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
       drawer: Drawer(
@@ -122,7 +141,8 @@ class _HomeFragmentState extends State<HomeFragment> {
           padding: EdgeInsets.all(0),
           children: [
             Container(
-              padding: EdgeInsets.only(left: 24, right: 24, top: 40, bottom: 24),
+              padding:
+                  EdgeInsets.only(left: 24, right: 24, top: 40, bottom: 24),
               color: appData.isDark ? Colors.black : Colors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,8 +150,10 @@ class _HomeFragmentState extends State<HomeFragment> {
                   Container(
                     padding: EdgeInsets.all(16),
                     child: Text(
-                      "J",
-                      style: TextStyle(fontSize: 24.0, color: appData.isDark ? Colors.black : whiteColor),
+                      "${appData.user!.firstName[0]}",
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          color: appData.isDark ? Colors.black : whiteColor),
                       textAlign: TextAlign.center,
                     ),
                     decoration: BoxDecoration(
@@ -141,8 +163,11 @@ class _HomeFragmentState extends State<HomeFragment> {
                   ),
                   Space(4),
                   Text(
-                    getName,
-                    style: TextStyle(fontSize: 18, color: appData.isDark ? whiteColor : Colors.black, fontWeight: FontWeight.bold),
+                    "${appData.user!.firstName} ${appData.user!.lastName}",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: appData.isDark ? whiteColor : Colors.black,
+                        fontWeight: FontWeight.bold),
                   ),
                   Space(4),
                   Text(getEmail, style: TextStyle(color: secondaryColor)),
@@ -153,8 +178,9 @@ class _HomeFragmentState extends State<HomeFragment> {
               drawerTitle: "My Profile",
               drawerIcon: Icons.person,
               drawerOnTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfileScreen()));
+                // Navigator.pop(context);
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => MyProfileScreen()));
               },
             ),
             // drawerWidget(
@@ -215,34 +241,213 @@ class _HomeFragmentState extends State<HomeFragment> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Form(
-                child: TextFormField(
-                  keyboardType: TextInputType.name,
-                  style: TextStyle(fontSize: 17),
-                  decoration: commonInputDecoration(
-                    hintText: "Search for services",
-                    suffixIcon: Icon(Icons.search, size: 18),
-                  ),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            child: Form(
+              child: TextFormField(
+                keyboardType: TextInputType.name,
+                style: TextStyle(fontSize: 17),
+                decoration: commonInputDecoration(
+                  hintText: "Search for services",
+                  suffixIcon: Icon(Icons.search, size: 18),
                 ),
               ),
             ),
-            ListView.builder(
+          ),
+          Expanded(
+            child: ListView.builder(
               shrinkWrap: true,
               primary: false,
               padding: EdgeInsets.all(8),
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: serviceProviders.length,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: generateMockups().length,
               itemBuilder: (context, index) {
-                return SearchComponent(index, servicesModel: serviceProviders[index]);
+                return GestureDetector(
+                  onTap: () {
+                    // _navigateToProviderDetailScreen(index);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    margin: EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: appData.isDark
+                          ? Colors.black
+                          : Colors.grey.withOpacity(0.2),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                generateMockups()[index].photoLink,
+                                width: 100,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            // Positioned(
+                            //   bottom: 0,
+                            //   left: 0,
+                            //   child: Padding(
+                            //     padding: EdgeInsets.all(6.0),
+                            //     child: GestureDetector(
+                            //       onTap: () {
+                            //         setLiked(widget.index, index);
+                            //         setState(() {});
+                            //       },
+                            //       child: CircleAvatar(
+                            //         maxRadius: 18,
+                            //         backgroundColor: likedIconBackColor,
+                            //         child: SizedBox(
+                            //           height: 16,
+                            //           width: 16,
+                            //           child: serviceProviders[widget.index]
+                            //                   .serviceProviders[index]
+                            //                   .isLiked
+                            //               ? Icon(
+                            //                   Icons.favorite,
+                            //                   size: 18,
+                            //                   color: Colors.red,
+                            //                 )
+                            //               : Image.asset(icHeart,
+                            //                   color: Colors.black),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // )
+                          ],
+                        ),
+                        Space(16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    generateMockups()[index].name,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 20),
+                                  ),
+                                  Space(4),
+                                  Text(
+                                    generateMockups()[index].description,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: greyColor, fontSize: 14),
+                                  ),
+                                  Space(4),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.star,
+                                  //         color: starIconColor, size: 16),
+                                  //     Text(
+                                  //       serviceProviders[widget.index]
+                                  //           .serviceProviders[index]
+                                  //           .star,
+                                  //       style: TextStyle(
+                                  //           fontWeight: FontWeight.bold,
+                                  //           fontSize: 16),
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                ],
+                              ),
+                              Space(16),
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      SizedBox(),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Php ${generateMockups()[index].pricePerDay}",
+                                                style: TextStyle( 
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                "/day ",
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                          Space(8),
+                                          ElevatedButton(
+                                            child: Text("Book",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                            onPressed: () {
+                                              // Navigator.push(
+                                              //   context,
+                                              //   MaterialPageRoute(
+                                              //     builder: (context) =>
+                                              //         ProviderServicesScreen(
+                                              //             serviceIndex:
+                                              //                 widget.index,
+                                              //             index: index),
+                                              //   ),
+                                              // );
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              shape: StadiumBorder(),
+                                              backgroundColor: appData.isDark
+                                                  ? Colors.grey.withOpacity(0.2)
+                                                  : Colors.black,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 16, horizontal: 32),
+                                              fixedSize: Size(140, 50),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

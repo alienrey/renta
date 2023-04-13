@@ -194,6 +194,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (value!.isEmpty) {
                           return "Please enter password";
                         }
+                        if (value.length < 8) {
+                          return "Password must be at least 8 characters";
+                        }
                         return null;
                       },
                       decoration: commonInputDecoration(
@@ -225,6 +228,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please re-enter password";
+                        }
+                        if (value.length < 8) {
+                          return "Password must be at least 8 characters";
                         }
                         return null;
                       },
@@ -282,6 +288,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if (_signUpFormKey.currentState!.validate()) {
                             context.loaderOverlay.show();
                             await FirebaseAuthService.signUp(
+                                    context:context,
                                     email: email,
                                     password: password,
                                     firstName: firstName,
@@ -289,16 +296,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     phoneNumber: phoneNumber)
                                 .then((value) => {
                                       context.loaderOverlay.hide(),
-                                      if (value == null)
-                                        {
-                                          showTopSnackBar(
-                                            Overlay.of(context),
-                                            const CustomSnackBar.error(
-                                              message:
-                                                  'Unable to create account!',
-                                            ),
-                                          )
-                                        }
+                                      if (value == null){}
                                       else
                                         {
                                           showTopSnackBar(
