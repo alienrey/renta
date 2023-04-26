@@ -47,6 +47,15 @@ class FirebaseRentalService {
     }
   }
 
+    Future<void> updateRentalWithId(String id, Rental rental) async {
+    try {
+      await rentalsCollection.doc(id).update(rental.toMap());
+    } catch (e) {
+      print('Error updating rental: $e');
+      throw e;
+    }
+  }
+
 }
 
 class Rental {

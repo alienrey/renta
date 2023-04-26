@@ -9,6 +9,7 @@ import 'package:renta/models/renovate_services_model.dart';
 import 'package:renta/models/renta/Booking.dart';
 import 'package:renta/models/renta/Rentals.dart';
 import 'package:renta/models/renta/User.dart';
+import 'package:renta/screens/dashboard_screen.dart';
 import 'package:renta/services/BookingService.dart';
 import 'package:renta/services/authentication.dart';
 import 'package:renta/services/userdataService.dart';
@@ -207,6 +208,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     child: Text("Book"),
                     onPressed: () {
                       context.loaderOverlay.show();
+                      Rental updatedRentalItem = rentalItem!;
+                      updatedRentalItem.isRented = true;
+
+                      FirebaseRentalService().updateRental(updatedRentalItem);
                       FirebaseBookingService()
                           .addBooking({
                             'itemId': widget.itemId,
@@ -223,8 +228,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 showTopSnackBar(
                                   Overlay.of(context),
                                   const CustomSnackBar.success(
-                                    message: 'Item has been booked for rent!',
+                                    message: 'Item has been booked for rent! Please wait for the owner to approve your booking.',
                                   ),
+                                ),
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => DashBoardScreen(defaultPageIndex: 1,)),
+                                  (route) => false,
                                 ),
                               })
                           .onError((error, stackTrace) => {
@@ -234,6 +244,11 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                   const CustomSnackBar.error(
                                     message: 'Failed to book item!',
                                   ),
+                                ),
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => DashBoardScreen(defaultPageIndex: 3,)),
+                                  (route) => false,
                                 ),
                               });
                       // Navigator.push(

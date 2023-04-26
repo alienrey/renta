@@ -41,7 +41,7 @@ class ActiveListingComponent extends StatelessWidget {
                     Text(
                       "Rent ID: ${booking!.id}",
                       textAlign: TextAlign.start,
-                      style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
                     ),
                     Text(
                       booking!.bookingStatus,
@@ -99,7 +99,7 @@ class ActiveListingComponent extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "To Collect: Php ${booking!.extraCharges}",
+                    " ${booking!.bookingStatus == 'Completed' ? 'Collected:' : 'To Collect:'} Php ${booking!.extraCharges}",
                     textAlign: TextAlign.end,
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                   ),

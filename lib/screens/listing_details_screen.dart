@@ -146,6 +146,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
           context.loaderOverlay.show();
           final updatedBooking = widget.booking;
           updatedBooking.bookingStatus = renting;
+          updatedBooking.item.isRented = false;
           FirebaseBookingService().updateBooking(updatedBooking).then((value) => {
             context.loaderOverlay.hide(),
             showTopSnackBar(

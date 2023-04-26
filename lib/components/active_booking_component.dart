@@ -8,6 +8,7 @@ import 'package:renta/screens/cancel_booking_screen.dart';
 import 'package:renta/screens/listing_details_screen.dart';
 import 'package:renta/utils/colors.dart';
 import 'package:renta/utils/images.dart';
+import 'package:intl/intl.dart';
 
 class ActiveBookingComponent extends StatelessWidget {
   // final ActiveBookingsModel? activeBookingsModel;
@@ -40,7 +41,7 @@ class ActiveBookingComponent extends StatelessWidget {
                     Text(
                       "Rent ID: ${booking!.id}",
                       textAlign: TextAlign.start,
-                      style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
                     ),
                     Text(
                       booking!.bookingStatus,
@@ -82,7 +83,7 @@ class ActiveBookingComponent extends StatelessWidget {
                             children: [
                               Icon(Icons.watch_later_outlined, color: orangeColor, size: 16),
                               Space(2),
-                              Text(booking!.returnDate.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              Text("${DateFormat('yyyy-MM-dd').format(booking!.rentDate)} @ ${DateFormat('HH:mm:ss').format(booking!.rentDate)}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                               Space(2),
                               // Text("at", style: TextStyle(color: orangeColor, fontSize: 12)),
                               // Space(2),
