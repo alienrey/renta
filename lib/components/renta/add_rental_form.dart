@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/widgets.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/main.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/images.dart';
+import 'package:renta/utils/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddProductForm extends StatefulWidget {
@@ -53,8 +54,8 @@ Future<void> _pickImage() async {
                 ),
                 shape: BoxShape.rectangle,
                 image: DecorationImage(
-                  image: _image != null ? FileImage(_image!) : Image.network('https://cdn0.iconfinder.com/data/icons/line-interface/128/_add_image-512.png').image,
-                  fit: BoxFit.cover,
+                  image: _image != null ? FileImage(_image!) : Image.asset(add_photo).image,
+                  fit: _image != null ? BoxFit.cover : BoxFit.contain,
                 ),
               ),
             ),

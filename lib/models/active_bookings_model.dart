@@ -1,4 +1,4 @@
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/utils/images.dart';
 
 List<ActiveBookingsModel> activeBooking = getActiveBooking();
 

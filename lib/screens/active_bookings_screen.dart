@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/components/active_booking_component.dart';
+import 'package:renta/components/active_booking_component.dart';
 
 import '../models/active_bookings_model.dart';
 

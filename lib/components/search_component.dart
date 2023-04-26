@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/models/services_model.dart';
-import 'package:home_hub/screens/service_providers_screen.dart';
-import 'package:home_hub/utils/colors.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/models/services_model.dart';
+import 'package:renta/screens/service_providers_screen.dart';
+import 'package:renta/utils/colors.dart';
 
 class SearchComponent extends StatelessWidget {
   final ServicesModel? servicesModel;

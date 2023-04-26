@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:home_hub/fragments/bookings_fragment.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/customer_details_model.dart';
-import 'package:home_hub/screens/favourite_services_screen.dart';
-import 'package:home_hub/screens/my_profile_screen.dart';
-import 'package:home_hub/screens/notification_screen.dart';
-import 'package:home_hub/screens/sign_in_screen.dart';
-import 'package:home_hub/services/authentication.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/fragments/bookings_fragment.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/customer_details_model.dart';
+import 'package:renta/screens/favourite_services_screen.dart';
+import 'package:renta/screens/my_profile_screen.dart';
+import 'package:renta/screens/notification_screen.dart';
+import 'package:renta/screens/sign_in_screen.dart';
+import 'package:renta/services/authentication.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/images.dart';
 
 import '../custom_widget/space.dart';
 

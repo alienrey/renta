@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:home_hub/screens/sign_in_screen.dart';
-import 'package:home_hub/screens/walk_through_screen.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/screens/sign_in_screen.dart';
+import 'package:renta/screens/walk_through_screen.dart';
+import 'package:renta/utils/images.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

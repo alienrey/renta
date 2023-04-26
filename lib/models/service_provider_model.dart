@@ -1,6 +1,6 @@
-import 'package:home_hub/models/provider_services_model.dart';
-import 'package:home_hub/models/services_model.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/models/provider_services_model.dart';
+import 'package:renta/models/services_model.dart';
+import 'package:renta/utils/images.dart';
 
 List<ServiceProviderModel> likedProviders = getLikedServices();
 

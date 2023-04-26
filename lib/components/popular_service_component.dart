@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/screens/service_providers_screen.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/screens/service_providers_screen.dart';
+import 'package:renta/utils/images.dart';
 
 class PopularServiceComponent extends StatefulWidget {
   @override

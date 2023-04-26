@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/screens/otp_verification_screen.dart';
-import 'package:home_hub/screens/sign_in_screen.dart';
-import 'package:home_hub/services/authentication.dart';
-import 'package:home_hub/utils/constant.dart';
-import 'package:home_hub/utils/widgets.dart';
+import 'package:renta/main.dart';
+import 'package:renta/screens/otp_verification_screen.dart';
+import 'package:renta/screens/sign_in_screen.dart';
+import 'package:renta/services/authentication.dart';
+import 'package:renta/utils/constant.dart';
+import 'package:renta/utils/widgets.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';

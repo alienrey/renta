@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/service_provider_model.dart';
-import 'package:home_hub/models/services_model.dart';
-import 'package:home_hub/screens/provider_services_screen.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/service_provider_model.dart';
+import 'package:renta/models/services_model.dart';
+import 'package:renta/screens/provider_services_screen.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/images.dart';
 
 class FavoriteServiceComponent extends StatefulWidget {
   final ServiceProviderModel? serviceProviderModel;

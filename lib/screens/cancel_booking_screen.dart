@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/screens/last_booking_screen.dart';
-import 'package:home_hub/utils/colors.dart';
+import 'package:renta/screens/last_booking_screen.dart';
+import 'package:renta/utils/colors.dart';
 
 import '../custom_widget/space.dart';
 import '../main.dart';

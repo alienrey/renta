@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:home_hub/components/combos_subscriptions_component.dart';
-import 'package:home_hub/components/customer_review_component.dart';
-import 'package:home_hub/components/home_contruction_component.dart';
-import 'package:home_hub/components/home_service_component.dart';
-import 'package:home_hub/components/popular_service_component.dart';
-import 'package:home_hub/components/renovate_home_component.dart';
-import 'package:home_hub/components/search_component.dart';
-import 'package:home_hub/fragments/bookings_fragment.dart';
-import 'package:home_hub/models/customer_details_model.dart';
-import 'package:home_hub/models/renta/Rentals.dart';
-import 'package:home_hub/screens/notification_screen.dart';
-import 'package:home_hub/screens/provider_detail_screen.dart';
-import 'package:home_hub/screens/provider_services_screen.dart';
-import 'package:home_hub/screens/service_providers_screen.dart';
-import 'package:home_hub/screens/sign_in_screen.dart';
-import 'package:home_hub/services/authentication.dart';
-import 'package:home_hub/utils/images.dart';
-import 'package:home_hub/utils/widgets.dart';
+import 'package:renta/components/combos_subscriptions_component.dart';
+import 'package:renta/components/customer_review_component.dart';
+import 'package:renta/components/home_contruction_component.dart';
+import 'package:renta/components/home_service_component.dart';
+import 'package:renta/components/popular_service_component.dart';
+import 'package:renta/components/renovate_home_component.dart';
+import 'package:renta/components/search_component.dart';
+import 'package:renta/fragments/bookings_fragment.dart';
+import 'package:renta/models/customer_details_model.dart';
+import 'package:renta/models/renta/Rentals.dart';
+import 'package:renta/screens/notification_screen.dart';
+import 'package:renta/screens/provider_detail_screen.dart';
+import 'package:renta/screens/provider_services_screen.dart';
+import 'package:renta/screens/service_providers_screen.dart';
+import 'package:renta/screens/sign_in_screen.dart';
+import 'package:renta/services/authentication.dart';
+import 'package:renta/utils/images.dart';
+import 'package:renta/utils/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../custom_widget/space.dart';
@@ -170,7 +170,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                         fontWeight: FontWeight.bold),
                   ),
                   Space(4),
-                  Text(getEmail, style: TextStyle(color: secondaryColor)),
+                  Text(appData.user!.email, style: TextStyle(color: secondaryColor)),
                 ],
               ),
             ),

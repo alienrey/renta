@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/models/service_provider_model.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/models/service_provider_model.dart';
+import 'package:renta/utils/images.dart';
 
 List<ServicesModel> serviceProviders = getServices();
 

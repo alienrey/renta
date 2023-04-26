@@ -1,14 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:home_hub/screens/sign_in_screen.dart';
+import 'package:renta/screens/sign_in_screen.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:home_hub/components/my_scroll_behaviour.dart';
-import 'package:home_hub/screens/splash_screen.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/constant.dart';
+import 'package:renta/components/my_scroll_behaviour.dart';
+import 'package:renta/screens/splash_screen.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/constant.dart';
 
 import 'store/appData.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/upi_payment.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/upi_payment.dart';
 
 import '../custom_widget/space.dart';
 import '../utils/colors.dart';

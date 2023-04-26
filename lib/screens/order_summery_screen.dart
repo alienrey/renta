@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/models/active_bookings_model.dart';
-import 'package:home_hub/models/combos_services_model.dart';
-import 'package:home_hub/models/renovate_services_model.dart';
-import 'package:home_hub/screens/payment_screen.dart';
+import 'package:renta/models/active_bookings_model.dart';
+import 'package:renta/models/combos_services_model.dart';
+import 'package:renta/models/renovate_services_model.dart';
+import 'package:renta/screens/payment_screen.dart';
 
 import '../custom_widget/space.dart';
 import '../main.dart';

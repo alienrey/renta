@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/components/booking_history_component.dart';
-import 'package:home_hub/models/last_bookings_model.dart';
+import 'package:renta/components/booking_history_component.dart';
+import 'package:renta/models/last_bookings_model.dart';
 
 class BookingHistoryScreen extends StatefulWidget {
   const BookingHistoryScreen({Key? key}) : super(key: key);

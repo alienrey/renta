@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/components/profile_widget.dart';
-import 'package:home_hub/components/text_field_widget.dart';
-import 'package:home_hub/models/customer_details_model.dart';
-import 'package:home_hub/screens/dashboard_screen.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/components/profile_widget.dart';
+import 'package:renta/components/text_field_widget.dart';
+import 'package:renta/models/customer_details_model.dart';
+import 'package:renta/screens/dashboard_screen.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/images.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);

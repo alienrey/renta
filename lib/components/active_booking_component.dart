@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/active_bookings_model.dart';
-import 'package:home_hub/screens/cancel_booking_screen.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/active_bookings_model.dart';
+import 'package:renta/screens/cancel_booking_screen.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/images.dart';
 
 class ActiveBookingComponent extends StatelessWidget {
   final ActiveBookingsModel? activeBookingsModel;

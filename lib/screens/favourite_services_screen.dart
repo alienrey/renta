@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/components/favorite_service_component.dart';
-import 'package:home_hub/utils/colors.dart';
+import 'package:renta/components/favorite_service_component.dart';
+import 'package:renta/utils/colors.dart';
 
 import '../models/service_provider_model.dart';
 

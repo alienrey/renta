@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:home_hub/components/apartment_size_component.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/active_bookings_model.dart';
-import 'package:home_hub/models/combos_services_model.dart';
-import 'package:home_hub/models/renovate_services_model.dart';
-import 'package:home_hub/utils/date.dart' as date;
-import 'package:home_hub/utils/widgets.dart';
+import 'package:renta/components/apartment_size_component.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/active_bookings_model.dart';
+import 'package:renta/models/combos_services_model.dart';
+import 'package:renta/models/renovate_services_model.dart';
+import 'package:renta/utils/date.dart' as date;
+import 'package:renta/utils/widgets.dart';
 
 import '../custom_widget/space.dart';
 import '../models/services_model.dart';

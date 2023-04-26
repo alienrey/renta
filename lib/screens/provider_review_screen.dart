@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/utils/images.dart';
+import 'package:renta/main.dart';
+import 'package:renta/utils/images.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 import '../custom_widget/space.dart';

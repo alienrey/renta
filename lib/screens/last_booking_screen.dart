@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/screens/dashboard_screen.dart';
-import 'package:home_hub/utils/colors.dart';
+import 'package:renta/screens/dashboard_screen.dart';
+import 'package:renta/utils/colors.dart';
 
 import '../custom_widget/space.dart';
 import '../main.dart';

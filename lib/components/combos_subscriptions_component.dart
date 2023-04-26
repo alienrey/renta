@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/models/combos_services_model.dart';
-import 'package:home_hub/screens/service_screen.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/models/combos_services_model.dart';
+import 'package:renta/screens/service_screen.dart';
 
 class CombosSubscriptionsComponent extends StatelessWidget {
   @override

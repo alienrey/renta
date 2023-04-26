@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/models/common_model.dart';
-import 'package:home_hub/screens/provider_review_screen.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/models/common_model.dart';
+import 'package:renta/screens/provider_review_screen.dart';
 
 class ServiceListComponent extends StatelessWidget {
   final CommonModel? commonModel;

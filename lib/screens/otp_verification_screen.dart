@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:home_hub/custom_widget/space.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/screens/dashboard_screen.dart';
-import 'package:home_hub/utils/colors.dart';
-import 'package:home_hub/utils/constant.dart';
+import 'package:renta/custom_widget/space.dart';
+import 'package:renta/main.dart';
+import 'package:renta/screens/dashboard_screen.dart';
+import 'package:renta/utils/colors.dart';
+import 'package:renta/utils/constant.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
   const OTPVerificationScreen({Key? key}) : super(key: key);

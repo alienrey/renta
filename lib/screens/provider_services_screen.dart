@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/services_model.dart';
-import 'package:home_hub/screens/service_screen.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/services_model.dart';
+import 'package:renta/screens/service_screen.dart';
 
 import '../custom_widget/space.dart';
 import '../utils/colors.dart';

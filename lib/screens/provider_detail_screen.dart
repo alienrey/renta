@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/components/service_list_component.dart';
-import 'package:home_hub/screens/provider_services_screen.dart';
-import 'package:home_hub/utils/widgets.dart';
+import 'package:renta/components/service_list_component.dart';
+import 'package:renta/screens/provider_services_screen.dart';
+import 'package:renta/utils/widgets.dart';
 
 import '../custom_widget/space.dart';
 import '../main.dart';

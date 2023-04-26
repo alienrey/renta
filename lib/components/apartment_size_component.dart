@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_hub/main.dart';
-import 'package:home_hub/models/apartment_size_model.dart';
-import 'package:home_hub/utils/colors.dart';
+import 'package:renta/main.dart';
+import 'package:renta/models/apartment_size_model.dart';
+import 'package:renta/utils/colors.dart';
 
 class ApartmentSizeComponent extends StatefulWidget {
   @override
