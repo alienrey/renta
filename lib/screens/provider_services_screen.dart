@@ -10,8 +10,9 @@ import '../utils/images.dart';
 class ProviderServicesScreen extends StatefulWidget {
   final int serviceIndex;
   final int index;
+  final String itemId;
 
-  const ProviderServicesScreen({Key? key, required this.index, required this.serviceIndex}) : super(key: key);
+  const ProviderServicesScreen({Key? key, required this.itemId,required this.index, required this.serviceIndex}) : super(key: key);
 
   @override
   State<ProviderServicesScreen> createState() => _ProviderServicesScreenState();
@@ -95,6 +96,7 @@ class _ProviderServicesScreenState extends State<ProviderServicesScreen> {
                             fromBooking: true,
                             serviceIndex: widget.serviceIndex,
                             providerIndex: widget.index,
+                            itemId: widget.itemId,
                           ),
                         ),
                       );
@@ -146,6 +148,7 @@ class _ProviderServicesScreenState extends State<ProviderServicesScreen> {
                             fromBooking: true,
                             serviceIndex: widget.serviceIndex,
                             providerIndex: widget.index,
+                            itemId: widget.itemId,
                           ),
                         ));
                   },

@@ -10,8 +10,9 @@ import '../utils/images.dart';
 
 class ServiceProvidersScreen extends StatefulWidget {
   final int index;
+  final String itemId;
 
-  const ServiceProvidersScreen({Key? key, required this.index}) : super(key: key);
+  const ServiceProvidersScreen({Key? key, required this.index, required this.itemId}) : super(key: key);
 
   @override
   State<ServiceProvidersScreen> createState() => _ServiceProvidersScreenState();
@@ -174,7 +175,7 @@ class _ServiceProvidersScreenState extends State<ServiceProvidersScreen> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: index),
+                                            builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: index, itemId: widget.itemId,),
                                           ),
                                         );
                                       },

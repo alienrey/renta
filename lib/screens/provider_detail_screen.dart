@@ -28,6 +28,9 @@ class ProviderDetailScreen extends StatefulWidget {
 }
 
 class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
+  double titleFontSize = 16;
+  double subtitleFontSize = 19;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -85,7 +88,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                             MaterialPageRoute(
                               builder: (context) => ProviderServicesScreen(
                                   serviceIndex: widget.serviceIndex,
-                                  index: widget.index),
+                                  index: widget.index,
+                                  itemId: widget.itemId,
+                                  ),
                             ),
                           );
                         },
@@ -107,31 +112,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        child: Text(
-                          serviceProviders[widget.serviceIndex]
-                              .serviceProviders[widget.index]
-                              .name,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 18),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          serviceProviders[widget.serviceIndex]
-                              .serviceProviders[widget.index]
-                              .detailDescription,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 6,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(color: subTitle, fontSize: 14),
-                        ),
-                      ),
-                      Space(8),
-                      Padding(
                         padding: EdgeInsets.all(16),
                         child: Stack(
                           children: [
@@ -151,138 +131,218 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                                     stops: [0, 0.2, 0.8, 1],
                                   ),
                                 ),
-                                child: Image.asset(
-                                  serviceProviders[widget.serviceIndex]
-                                      .serviceProviders[widget.index]
-                                      .providerImage,
+                                child: Image.network(
+                                  snapshot.data!.photoLink,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                            Positioned(
-                              left: 0,
-                              right: 0,
-                              bottom: 8,
-                              child: Padding(
-                                padding: EdgeInsets.only(bottom: 8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text("jobs",
-                                            style: TextStyle(
-                                                color: whiteColor,
-                                                fontSize: 12)),
-                                        Space(4),
-                                        Text(
-                                          serviceProviders[widget.serviceIndex]
-                                              .serviceProviders[widget.index]
-                                              .jobs,
-                                          style: TextStyle(
-                                              color: whiteColor,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text("share",
-                                            style: TextStyle(
-                                                color: whiteColor,
-                                                fontSize: 12)),
-                                        Space(4),
-                                        Icon(
-                                          Icons.share,
-                                          color: whiteColor,
-                                          size: 18,
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text("Rating",
-                                            style: TextStyle(
-                                                color: whiteColor,
-                                                fontSize: 12)),
-                                        Space(4),
-                                        Text(
-                                          serviceProviders[widget.serviceIndex]
-                                              .serviceProviders[widget.index]
-                                              .star,
-                                          style: TextStyle(
-                                              color: whiteColor,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text("Save",
-                                            style: TextStyle(
-                                                color: whiteColor,
-                                                fontSize: 12)),
-                                        Space(4),
-                                        GestureDetector(
-                                          onTap: () {
-                                            setLiked(widget.serviceIndex,
-                                                widget.index);
-                                            setState(() {});
-                                          },
-                                          child: serviceProviders[
-                                                      widget.serviceIndex]
-                                                  .serviceProviders[
-                                                      widget.index]
-                                                  .isLiked
-                                              ? Icon(Icons.favorite,
-                                                  color: Colors.red, size: 18)
-                                              : Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.white,
-                                                  size: 18,
-                                                ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Positioned(
+                            //   left: 0,
+                            //   right: 0,
+                            //   bottom: 8,
+                            //   child: Padding(
+                            //     padding: EdgeInsets.only(bottom: 8.0),
+                            //     child: Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceAround,
+                            //       crossAxisAlignment: CrossAxisAlignment.start,
+                            //       children: [
+                            //         Column(
+                            //           children: [
+                            //             Text("jobs",
+                            //                 style: TextStyle(
+                            //                     color: whiteColor,
+                            //                     fontSize: 12)),
+                            //             Space(4),
+                            //             Text(
+                            //               serviceProviders[widget.serviceIndex]
+                            //                   .serviceProviders[widget.index]
+                            //                   .jobs,
+                            //               style: TextStyle(
+                            //                   color: whiteColor,
+                            //                   fontWeight: FontWeight.w900,
+                            //                   fontSize: 18),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //         Column(
+                            //           children: [
+                            //             Text("share",
+                            //                 style: TextStyle(
+                            //                     color: whiteColor,
+                            //                     fontSize: 12)),
+                            //             Space(4),
+                            //             Icon(
+                            //               Icons.share,
+                            //               color: whiteColor,
+                            //               size: 18,
+                            //             ),
+                            //           ],
+                            //         ),
+                            //         Column(
+                            //           children: [
+                            //             Text("Rating",
+                            //                 style: TextStyle(
+                            //                     color: whiteColor,
+                            //                     fontSize: 12)),
+                            //             Space(4),
+                            //             Text(
+                            //               serviceProviders[widget.serviceIndex]
+                            //                   .serviceProviders[widget.index]
+                            //                   .star,
+                            //               style: TextStyle(
+                            //                   color: whiteColor,
+                            //                   fontWeight: FontWeight.w900,
+                            //                   fontSize: 18),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //         Column(
+                            //           children: [
+                            //             Text("Save",
+                            //                 style: TextStyle(
+                            //                     color: whiteColor,
+                            //                     fontSize: 12)),
+                            //             Space(4),
+                            //             GestureDetector(
+                            //               onTap: () {
+                            //                 setLiked(widget.serviceIndex,
+                            //                     widget.index);
+                            //                 setState(() {});
+                            //               },
+                            //               child: serviceProviders[
+                            //                           widget.serviceIndex]
+                            //                       .serviceProviders[
+                            //                           widget.index]
+                            //                       .isLiked
+                            //                   ? Icon(Icons.favorite,
+                            //                       color: Colors.red, size: 18)
+                            //                   : Icon(
+                            //                       Icons.favorite,
+                            //                       color: Colors.white,
+                            //                       size: 18,
+                            //                     ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
-                      Space(32),
-                      homeTitleWidget(
-                        titleText: "Recent Projects",
-                        onAllTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AllCategoriesScreen(
-                                list: renovateServices,
-                                fromProviderDetails: true,
-                              ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                        child: Card(
+                          color: appData.isDark ? cardColorDark : cardColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        child: Text(
+                                          "Item Name",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: titleFontSize),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 16),
+                                        child: Text(
+                                          snapshot.data!.name,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 6,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: subTitle,
+                                              fontSize: subtitleFontSize),
+                                        ),
+                                      ),
+                                      Space(8),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        child: Text(
+                                          "Item Description",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: titleFontSize),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 16),
+                                        child: Text(
+                                          snapshot.data!.description,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 6,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: subTitle,
+                                              fontSize: subtitleFontSize),
+                                        ),
+                                      ),
+                                      Space(8),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        child: Text(
+                                          "Rate (Per Day)",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: titleFontSize),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 16),
+                                        child: Text(
+                                          "Php ${snapshot.data!.pricePerDay.toString()}",
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 6,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: subTitle,
+                                              fontSize: subtitleFontSize),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: 130,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          children: List.generate(
-                            renovateServices.length,
-                            (index) => ServiceListComponent(
-                                commonModel: renovateServices[index],
-                                index: index),
                           ),
                         ),
                       ),
+                      // homeTitleWidget(
+                      //   titleText: "Recent Projects",
+                      //   onAllTap: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => AllCategoriesScreen(
+                      //           list: renovateServices,
+                      //           fromProviderDetails: true,
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                       Space(70),
                     ],
                   ),

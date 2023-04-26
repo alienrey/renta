@@ -14,6 +14,7 @@ import 'package:renta/screens/notification_screen.dart';
 import 'package:renta/screens/provider_detail_screen.dart';
 import 'package:renta/screens/provider_services_screen.dart';
 import 'package:renta/screens/service_providers_screen.dart';
+import 'package:renta/screens/service_screen.dart';
 import 'package:renta/screens/sign_in_screen.dart';
 import 'package:renta/services/authentication.dart';
 import 'package:renta/utils/images.dart';
@@ -58,7 +59,7 @@ class _HomeFragmentState extends State<HomeFragment> {
       context,
       MaterialPageRoute(
         builder: (context) =>
-            ProviderDetailScreen(serviceIndex: widget.index, index: index, itemId: itemId,),
+            ServiceScreen(itemId: itemId),
       ),
     );
     if (result) {

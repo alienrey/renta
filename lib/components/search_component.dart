@@ -16,7 +16,7 @@ class SearchComponent extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index)),
+          MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index, itemId: "",)),
         );
       },
       child: Padding(

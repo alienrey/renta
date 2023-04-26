@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -13,6 +14,7 @@ import 'package:renta/utils/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AddProductForm extends StatefulWidget {
   @override
@@ -35,6 +37,21 @@ Future<void> _pickImage() async {
     setState(() {
       _image = File(pickedFile.path);
     });
+  }
+}
+
+Future<String?> uploadImage(File image) async {
+  try {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference storageReference =
+        FirebaseStorage.instance.ref().child('images/$fileName');
+    UploadTask uploadTask = storageReference.putFile(image);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    return downloadUrl;
+  } catch (error) {
+    print(error);
+    return null;
   }
 }
 
@@ -111,7 +128,7 @@ Future<void> _pickImage() async {
             textInputAction: TextInputAction.next,
             maxLines: 3,
             style: TextStyle(fontSize: 15),
-            inputFormatters: [LengthLimitingTextInputFormatter(100)],
+            inputFormatters: [LengthLimitingTextInputFormatter(1000)],
             decoration: InputDecoration(
               filled: true,
               hintText: "Describe your item, its condition, uses, issues, etc.",
@@ -176,7 +193,7 @@ Future<void> _pickImage() async {
                     ? Colors.grey.withOpacity(0.2)
                     : Colors.black,
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
 
@@ -190,13 +207,15 @@ Future<void> _pickImage() async {
 
                   context.loaderOverlay.show();
 
+                  final downloadLink = await uploadImage(_image!);
+
                   FirebaseRentalService().createRental({
                     "name": _name,
                     "description": _description,
                     "pricePerDay": _pricePerDay,
                     "ownerId": FirebaseAuthService.getCurrentUserId(),
                     "isRented": false,
-                    "photoLink": "https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-14-Pro-iPhone-14-Pro-Max-hero-220907_Full-Bleed-Image.jpg.xlarge.jpg"
+                    "photoLink": downloadLink
                   }).then((value) => {
                     context.loaderOverlay.hide(),
                     FirebaseRentalService().getAllRentals().then((value) => {print(value.toString())}),
@@ -208,7 +227,7 @@ Future<void> _pickImage() async {
                       ),
                     ),
                   }).onError((error, stackTrace) => {
-                    context.loaderOverlay.show(),
+                    context.loaderOverlay.hide(),
                     showTopSnackBar(
                       Overlay.of(context),
                       const CustomSnackBar.error(

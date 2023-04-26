@@ -38,7 +38,7 @@ class _PopularServiceComponentState extends State<PopularServiceComponent> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index)),
+                MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index, itemId: "",)),
               );
             },
             child: Padding(

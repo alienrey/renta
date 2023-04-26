@@ -17,7 +17,7 @@ class RenovateHomeComponent extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ServiceScreen(index: index, fromRenovate: true)),
+                MaterialPageRoute(builder: (context) => ServiceScreen(index: index, fromRenovate: true, itemId: "",)),
               );
             },
             child: Padding(

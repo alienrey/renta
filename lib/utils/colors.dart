@@ -40,8 +40,8 @@ const bottomContainerTextDark = whiteColor;
 Color itemCountContainer = Colors.yellow.shade600;
 Color itemCountContainerBorder = Colors.grey.shade400;
 
-Color subTitle = Colors.grey.shade500;
-Color subText = Colors.grey.shade400;
+Color subTitle = Color.fromARGB(255, 73, 73, 73);
+Color subText = Color.fromARGB(255, 63, 63, 63);
 Color paymentCard = Colors.grey.shade100;
 Color paymentCardBorder = Colors.grey.shade200;
 const paymentText = blackColor;

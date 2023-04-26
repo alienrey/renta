@@ -117,7 +117,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                       if (widget.list == serviceProviders) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index)),
+                          MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index ,itemId: "",)),
                         );
                       } else {
                         if (widget.fromProviderDetails) {
@@ -128,7 +128,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                         } else {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ServiceScreen(index: index)),
+                            MaterialPageRoute(builder: (context) => ServiceScreen(index: index, itemId: "",)),
                           );
                         }
                       }

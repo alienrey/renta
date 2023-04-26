@@ -17,7 +17,7 @@ class CombosSubscriptionsComponent extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ServiceScreen(index: index)),
+                MaterialPageRoute(builder: (context) => ServiceScreen(index: index, itemId: "",)),
               );
             },
             child: Padding(

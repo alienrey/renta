@@ -40,7 +40,7 @@ class _HomeServiceComponentState extends State<HomeServiceComponent> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index)),
+                MaterialPageRoute(builder: (context) => ServiceProvidersScreen(index: index, itemId: "",)),
               );
               for (var i = 0; i < serviceProviders.length; i++) {
                 if (i == index) {

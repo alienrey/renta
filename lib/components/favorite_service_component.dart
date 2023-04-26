@@ -156,7 +156,7 @@ class _FavoriteServiceComponentState extends State<FavoriteServiceComponent> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: widget.index),
+                                      builder: (context) => ProviderServicesScreen(serviceIndex: widget.index, index: widget.index, itemId: "",),
                                     ),
                                   );
                                 },
