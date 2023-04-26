@@ -5,14 +5,14 @@ import 'package:renta/models/renta/Booking.dart';
 import 'package:renta/services/BookingService.dart';
 import 'package:renta/utils/constant.dart';
 
-class ActiveBookingsScreen extends StatefulWidget {
-  const ActiveBookingsScreen({Key? key}) : super(key: key);
+class BookingsHistoryScreen extends StatefulWidget {
+  const BookingsHistoryScreen({Key? key}) : super(key: key);
 
   @override
-  State<ActiveBookingsScreen> createState() => _ActiveBookingsScreenState();
+  State<BookingsHistoryScreen> createState() => _BookingsHistoryScreenState();
 }
 
-class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
+class _BookingsHistoryScreenState extends State<BookingsHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +27,8 @@ class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
             return Center(child: Text("No Data"));
           } else {
 
-            final activeRents = snapshot.data!.where((element) => element.bookingStatus == pending || element.bookingStatus == renting).toList();
+            final activeRents = snapshot.data!.where((element) => element.bookingStatus == completed).toList();
             if(activeRents.isEmpty) return Center(child: Text("No Data"));
-
 
             return ListView.builder(
               padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 16),

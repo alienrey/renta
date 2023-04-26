@@ -6,7 +6,8 @@ import 'package:renta/fragments/listings_fragment.dart';
 import 'package:renta/fragments/search_fragment.dart';
 
 class DashBoardScreen extends StatefulWidget {
-  const DashBoardScreen({Key? key}) : super(key: key);
+  final int? defaultPageIndex;
+  const DashBoardScreen({Key? key, this.defaultPageIndex}) : super(key: key);
 
   @override
   State<DashBoardScreen> createState() => _DashBoardScreenState();
@@ -23,6 +24,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     AccountFragment(),
   ];
   int _selectedItem = 0;
+
+    @override
+    void initState() {
+      super.initState();
+      init();
+    }
+
+    void init() async {
+      _selectedItem = widget.defaultPageIndex != null ? widget.defaultPageIndex! : 0;
+    }
 
   @override
   Widget build(BuildContext context) {

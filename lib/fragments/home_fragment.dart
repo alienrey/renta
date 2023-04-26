@@ -273,9 +273,9 @@ class _HomeFragmentState extends State<HomeFragment> {
               builder:
                   (BuildContext context, AsyncSnapshot<List<Rental>> snapshot) {
                 if (snapshot.hasData) {
-                  final filteredList = snapshot.data?.where((rental) => rental.name.toLowerCase().contains(_searchController.text.toLowerCase())).where((element) => element.ownerId != FirebaseAuthService.getCurrentUserId()).toList();
-                  
-                  if(filteredList!.isEmpty){
+                  final rentals = snapshot.data?.where((rental) => rental.name.toLowerCase().contains(_searchController.text.toLowerCase())).where((element) => element.ownerId != FirebaseAuthService.getCurrentUserId()).toList();
+                  final filteredList = rentals!.where((element) => !element.isRented).toList();
+                  if(filteredList.isEmpty){
                     return Center(
                       child: Text('No items are listed yet.'),
                     );

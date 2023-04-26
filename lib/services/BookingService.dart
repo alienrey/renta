@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:renta/models/renta/Booking.dart';
+import 'package:renta/models/renta/Rentals.dart';
 
 class FirebaseBookingService {
-  final CollectionReference bookingsCollection = FirebaseFirestore.instance.collection('bookings');
+  final CollectionReference bookingsCollection =
+      FirebaseFirestore.instance.collection('bookings');
   final User? _user = FirebaseAuth.instance.currentUser;
 
   // Create a new booking
-    Future<void> addBooking(Map<String, dynamic> data) async {
+  Future<void> addBooking(Map<String, dynamic> data) async {
     try {
       DocumentReference doc = await bookingsCollection.add(data);
       await doc.set({...data, "id": doc.id});
@@ -18,8 +20,14 @@ class FirebaseBookingService {
   }
 
   // Update an existing booking
-  Future<void> updateBooking(Booking booking) {
-    return bookingsCollection.doc(booking.id).update(booking.toMap());
+  Future<void> updateBooking(Booking booking) async {
+    try {
+      FirebaseRentalService().updateRental(booking.item);
+      await bookingsCollection.doc(booking.id).update(booking.toMap());
+    } catch (e) {
+      print('Error updating rental: $e');
+      throw e;
+    }
   }
 
   // Delete a booking
@@ -29,19 +37,21 @@ class FirebaseBookingService {
 
   // Get all bookings for the current user
   Future<List<Booking>> getMyBookings() async {
-    final snapshot = await bookingsCollection
-        .where('renterId', isEqualTo: _user!.uid)
-        .get();
-    final bookings = snapshot.docs.map((doc) => Booking.fromMap(doc.data() as Map<String, dynamic>)).toList();
+    final snapshot =
+        await bookingsCollection.where('renterId', isEqualTo: _user!.uid).get();
+    final bookings = snapshot.docs
+        .map((doc) => Booking.fromMap(doc.data() as Map<String, dynamic>))
+        .toList();
     return bookings;
   }
 
-   Future<List<Booking>> getMyActiveListings() async {
+  Future<List<Booking>> getMyActiveListings() async {
     final snapshot = await bookingsCollection
         .where('item.ownerId', isEqualTo: _user!.uid)
         .get();
-    final bookings = snapshot.docs.map((doc) => Booking.fromMap(doc.data() as Map<String, dynamic>)).toList();
+    final bookings = snapshot.docs
+        .map((doc) => Booking.fromMap(doc.data() as Map<String, dynamic>))
+        .toList();
     return bookings;
   }
-
 }

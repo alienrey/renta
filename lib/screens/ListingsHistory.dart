@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:renta/components/active_booking_component.dart';
-import 'package:renta/models/active_bookings_model.dart';
+import 'package:renta/components/active_listing_component.dart';
 import 'package:renta/models/renta/Booking.dart';
 import 'package:renta/services/BookingService.dart';
 import 'package:renta/utils/constant.dart';
 
-class ActiveBookingsScreen extends StatefulWidget {
-  const ActiveBookingsScreen({Key? key}) : super(key: key);
+class ListingsHistory extends StatefulWidget {
+  const ListingsHistory({Key? key}) : super(key: key);
 
   @override
-  State<ActiveBookingsScreen> createState() => _ActiveBookingsScreenState();
+  State<ListingsHistory> createState() => _ListingsHistoryState();
 }
 
-class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
+class _ListingsHistoryState extends State<ListingsHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<Booking>>(
-        future: FirebaseBookingService().getMyBookings(),
+        future: FirebaseBookingService().getMyActiveListings(),
         builder: (BuildContext context, AsyncSnapshot<List<Booking>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -27,21 +27,21 @@ class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
             return Center(child: Text("No Data"));
           } else {
 
-            final activeRents = snapshot.data!.where((element) => element.bookingStatus == pending || element.bookingStatus == renting).toList();
-            if(activeRents.isEmpty) return Center(child: Text("No Data"));
+            final completedRents = snapshot.data!.where((element) => element.bookingStatus == completed).toList();
+            
+            if(completedRents.isEmpty) return Center(child: Text("No Data"));
 
 
             return ListView.builder(
               padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 16),
-              itemCount: activeRents.length,
+              itemCount: completedRents.length,
               itemBuilder: (BuildContext context, int index) {
-                return ActiveBookingComponent(booking: activeRents[index]);
+                return ActiveListingComponent(booking: completedRents[index]);
               },
             );
           }
         },
       ),
-
     );
   }
 }

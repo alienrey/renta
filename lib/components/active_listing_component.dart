@@ -3,7 +3,9 @@ import 'package:renta/custom_widget/space.dart';
 import 'package:renta/main.dart';
 import 'package:renta/models/active_bookings_model.dart';
 import 'package:renta/models/renta/Booking.dart';
+import 'package:renta/screens/bookings_details_screen.dart';
 import 'package:renta/screens/cancel_booking_screen.dart';
+import 'package:renta/screens/listing_details_screen.dart';
 import 'package:renta/screens/service_screen.dart';
 import 'package:renta/utils/colors.dart';
 import 'package:renta/utils/images.dart';
@@ -19,10 +21,10 @@ class ActiveListingComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => ListingDet(itemId: booking!.itemId,)),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ListingDetailsScreen(booking: booking!,)),
+        );
       },
       child: Padding(
         padding: EdgeInsets.only(top: 8.0),
@@ -97,7 +99,7 @@ class ActiveListingComponent extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "To Collect: ₹${booking!.extraCharges}",
+                    "To Collect: Php ${booking!.extraCharges}",
                     textAlign: TextAlign.end,
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                   ),

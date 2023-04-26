@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:renta/screens/ActiveListings.dart';
+import 'package:renta/screens/ListingsHistory.dart';
 import 'package:renta/screens/active_bookings_screen.dart';
 import 'package:renta/screens/booking_history_screen.dart';
 import 'package:renta/utils/colors.dart';
@@ -58,7 +59,7 @@ class _ListingsFragmentState extends State<ListingsFragment> with SingleTickerPr
         controller: bookingTabController,
         children: [
           ActiveListings(),
-          BookingHistoryScreen(),
+          ListingsHistory(),
         ],
       ),
       // body: Center(child: Text("Under Construction..."),)

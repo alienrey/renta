@@ -3,7 +3,9 @@ import 'package:renta/custom_widget/space.dart';
 import 'package:renta/main.dart';
 import 'package:renta/models/active_bookings_model.dart';
 import 'package:renta/models/renta/Booking.dart';
+import 'package:renta/screens/bookings_details_screen.dart';
 import 'package:renta/screens/cancel_booking_screen.dart';
+import 'package:renta/screens/listing_details_screen.dart';
 import 'package:renta/utils/colors.dart';
 import 'package:renta/utils/images.dart';
 
@@ -18,10 +20,10 @@ class ActiveBookingComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => CancelBookingScreen(activeId: index)),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BookingsDetailScreen(booking: booking!,)),
+        );
       },
       child: Padding(
         padding: EdgeInsets.only(top: 8.0),
@@ -96,7 +98,7 @@ class ActiveBookingComponent extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Due Balance: ₹${booking!.extraCharges}",
+                    "Due Balance: Php ${booking!.extraCharges}",
                     textAlign: TextAlign.end,
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                   ),

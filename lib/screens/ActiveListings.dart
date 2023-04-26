@@ -29,6 +29,8 @@ class _ActiveListingsState extends State<ActiveListings> {
 
             final activeRents = snapshot.data!.where((element) => element.bookingStatus == pending || element.bookingStatus == renting).toList();
 
+            if(activeRents.isEmpty) return Center(child: Text("No Data"));
+
             return ListView.builder(
               padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 16),
               itemCount: activeRents.length,

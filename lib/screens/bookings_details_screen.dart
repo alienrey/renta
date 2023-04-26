@@ -25,7 +25,7 @@ import '../models/services_model.dart';
 import '../utils/colors.dart';
 import 'order_summery_screen.dart';
 
-class ListingDetailsScreen extends StatefulWidget {
+class BookingsDetailScreen extends StatefulWidget {
   final int index;
   final bool fromRenovate;
   final bool fromBooking;
@@ -33,7 +33,7 @@ class ListingDetailsScreen extends StatefulWidget {
   final int providerIndex;
   final Booking booking;
 
-  const ListingDetailsScreen(
+  const BookingsDetailScreen(
       {Key? key,
       this.index = 0,
       this.fromRenovate = false,
@@ -44,10 +44,10 @@ class ListingDetailsScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ListingDetailsScreen> createState() => _ListingDetailsScreenState();
+  State<BookingsDetailScreen> createState() => _BookingsDetailScreenState();
 }
 
-class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
+class _BookingsDetailScreenState extends State<BookingsDetailScreen> {
   List<DateTime> currentMonthList = [];
 
   DateTime currentDateTime = DateTime.now();
@@ -146,6 +146,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
           context.loaderOverlay.show();
           final updatedBooking = widget.booking;
           updatedBooking.bookingStatus = renting;
+          updatedBooking.item.isRented = true;
           FirebaseBookingService().updateBooking(updatedBooking).then((value) => {
             context.loaderOverlay.hide(),
             showTopSnackBar(
@@ -180,11 +181,12 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
               MediaQuery.of(context).size.height * 0.06),
           shape: StadiumBorder(),
         ),
-        child: Text("End Rent"),
+        child: Text("Complete"),
         onPressed: () {
           context.loaderOverlay.show();
           final updatedBooking = widget.booking;
           updatedBooking.bookingStatus = completed;
+          updatedBooking.item.isRented = false;
           FirebaseBookingService().updateBooking(updatedBooking).then((value) => {
             context.loaderOverlay.hide(),
             showTopSnackBar(
@@ -295,7 +297,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
                       }),
                 ),
                 Space(16),
-                Expanded(child: getButton(widget.booking.bookingStatus)!),
+                // Expanded(child: getButton(widget.booking.bookingStatus)!),
               ],
             ),
           );

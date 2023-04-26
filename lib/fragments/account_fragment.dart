@@ -4,6 +4,7 @@ import 'package:renta/fragments/bookings_fragment.dart';
 import 'package:renta/fragments/listings_fragment.dart';
 import 'package:renta/main.dart';
 import 'package:renta/models/customer_details_model.dart';
+import 'package:renta/screens/dashboard_screen.dart';
 import 'package:renta/screens/favourite_services_screen.dart';
 import 'package:renta/screens/my_profile_screen.dart';
 import 'package:renta/screens/notification_screen.dart';
@@ -144,11 +145,11 @@ class _AccountFragmentState extends State<AccountFragment> {
               leading: Icon(Icons.list_alt, size: 20),
               title: Text("My Rents"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            BookingsFragment(fromProfile: true)));
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => DashBoardScreen(defaultPageIndex: 1,)),
+                  (route) => false,
+                );
               },
             ),
             ListTile(
@@ -157,11 +158,11 @@ class _AccountFragmentState extends State<AccountFragment> {
               leading: Icon(Icons.storage, size: 20),
               title: Text("My Listings"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ListingsFragment(fromProfile: true)));
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => DashBoardScreen(defaultPageIndex: 3,)),
+                  (route) => false,
+                );
               },
             ),
             // ListTile(
