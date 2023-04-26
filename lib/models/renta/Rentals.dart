@@ -27,6 +27,18 @@ class FirebaseRentalService {
       throw e;
     }
   }
+
+   Future<Rental> getRental(String rentalId) async {
+    try {
+      final rentalDoc = await rentalsCollection.doc(rentalId).get();
+      final rentalData = rentalDoc.data() as Map<String, dynamic>;
+      
+      return Rental.fromMap({...rentalData, 'id': rentalDoc.id});
+    } catch (e) {
+      print('Error getting rental: $e');
+      throw e;
+    }
+  }
 }
 
 class Rental {

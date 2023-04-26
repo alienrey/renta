@@ -53,12 +53,12 @@ class _HomeFragmentState extends State<HomeFragment> {
     super.dispose();
   }
 
-  Future<void> _navigateToProviderDetailScreen(int index) async {
+  Future<void> _navigateToProviderDetailScreen(int index, String itemId) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) =>
-            ProviderDetailScreen(serviceIndex: widget.index, index: index),
+            ProviderDetailScreen(serviceIndex: widget.index, index: index, itemId: itemId,),
       ),
     );
     if (result) {
@@ -175,7 +175,8 @@ class _HomeFragmentState extends State<HomeFragment> {
                         fontWeight: FontWeight.bold),
                   ),
                   Space(4),
-                  Text(appData.user!.email, style: TextStyle(color: secondaryColor)),
+                  Text(appData.user!.email,
+                      style: TextStyle(color: secondaryColor)),
                 ],
               ),
             ),
@@ -262,193 +263,232 @@ class _HomeFragmentState extends State<HomeFragment> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              primary: false,
-              padding: EdgeInsets.all(8),
-              physics: AlwaysScrollableScrollPhysics(),
-              itemCount: generateMockups().length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    // _navigateToProviderDetailScreen(index);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.only(bottom: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: appData.isDark
-                          ? Colors.black
-                          : Colors.grey.withOpacity(0.2),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                generateMockups()[index].photoLink,
-                                width: 100,
-                                height: 150,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            // Positioned(
-                            //   bottom: 0,
-                            //   left: 0,
-                            //   child: Padding(
-                            //     padding: EdgeInsets.all(6.0),
-                            //     child: GestureDetector(
-                            //       onTap: () {
-                            //         setLiked(widget.index, index);
-                            //         setState(() {});
-                            //       },
-                            //       child: CircleAvatar(
-                            //         maxRadius: 18,
-                            //         backgroundColor: likedIconBackColor,
-                            //         child: SizedBox(
-                            //           height: 16,
-                            //           width: 16,
-                            //           child: serviceProviders[widget.index]
-                            //                   .serviceProviders[index]
-                            //                   .isLiked
-                            //               ? Icon(
-                            //                   Icons.favorite,
-                            //                   size: 18,
-                            //                   color: Colors.red,
-                            //                 )
-                            //               : Image.asset(icHeart,
-                            //                   color: Colors.black),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // )
-                          ],
-                        ),
-                        Space(16),
-                        Expanded(
-                          child: Column(
+            child: FutureBuilder<List<Rental>>(
+              future: FirebaseRentalService().getAllRentals(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Rental>> snapshot) {
+                if (snapshot.hasData) {
+
+                  final filteredList = snapshot.data?.where((element) => element.ownerId != FirebaseAuthService.getCurrentUserId()).toList();
+                  
+                  if(filteredList!.isEmpty){
+                    return Center(
+                      child: Text('No items are listed yet.'),
+                    );
+                  }
+                  // Build the list using the data returned from the future
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    padding: EdgeInsets.all(8),
+                    physics: AlwaysScrollableScrollPhysics(),
+                    itemCount: filteredList.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          _navigateToProviderDetailScreen(index, filteredList[index].id);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          margin: EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: appData.isDark
+                                ? Colors.black
+                                : Colors.grey.withOpacity(0.2),
+                          ),
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Stack(
                                 children: [
-                                  Text(
-                                    generateMockups()[index].name,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 20),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      filteredList[index].photoLink,
+                                      width: 100,
+                                      height: 150,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  Space(4),
-                                  Text(
-                                    generateMockups()[index].description,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: greyColor, fontSize: 14),
-                                  ),
-                                  Space(4),
-                                  // Row(
-                                  //   children: [
-                                  //     Icon(Icons.star,
-                                  //         color: starIconColor, size: 16),
-                                  //     Text(
-                                  //       serviceProviders[widget.index]
-                                  //           .serviceProviders[index]
-                                  //           .star,
-                                  //       style: TextStyle(
-                                  //           fontWeight: FontWeight.bold,
-                                  //           fontSize: 16),
+                                  // Positioned(
+                                  //   bottom: 0,
+                                  //   left: 0,
+                                  //   child: Padding(
+                                  //     padding: EdgeInsets.all(6.0),
+                                  //     child: GestureDetector(
+                                  //       onTap: () {
+                                  //         setLiked(widget.index, index);
+                                  //         setState(() {});
+                                  //       },
+                                  //       child: CircleAvatar(
+                                  //         maxRadius: 18,
+                                  //         backgroundColor: likedIconBackColor,
+                                  //         child: SizedBox(
+                                  //           height: 16,
+                                  //           width: 16,
+                                  //           child: serviceProviders[widget.index]
+                                  //                   .serviceProviders[index]
+                                  //                   .isLiked
+                                  //               ? Icon(
+                                  //                   Icons.favorite,
+                                  //                   size: 18,
+                                  //                   color: Colors.red,
+                                  //                 )
+                                  //               : Image.asset(icHeart,
+                                  //                   color: Colors.black),
+                                  //         ),
+                                  //       ),
                                   //     ),
-                                  //   ],
-                                  // ),
+                                  //   ),
+                                  // )
                                 ],
                               ),
                               Space(16),
-                              Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      SizedBox(),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Php ${generateMockups()[index].pricePerDay}",
-                                                style: TextStyle( 
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 20),
-                                              ),
-                                              Text(
-                                                "/day ",
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                          Space(8),
-                                          ElevatedButton(
-                                            child: Text("Book",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                            onPressed: () {
-                                              // Navigator.push(
-                                              //   context,
-                                              //   MaterialPageRoute(
-                                              //     builder: (context) =>
-                                              //         ProviderServicesScreen(
-                                              //             serviceIndex:
-                                              //                 widget.index,
-                                              //             index: index),
-                                              //   ),
-                                              // );
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: StadiumBorder(),
-                                              backgroundColor: appData.isDark
-                                                  ? Colors.grey.withOpacity(0.2)
-                                                  : Colors.black,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 16, horizontal: 32),
-                                              fixedSize: Size(140, 50),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          filteredList[index].name,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 20),
+                                        ),
+                                        Space(4),
+                                        Text(
+                                          filteredList[index].description,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: greyColor, fontSize: 14),
+                                        ),
+                                        Space(4),
+                                        // Row(
+                                        //   children: [
+                                        //     Icon(Icons.star,
+                                        //         color: starIconColor, size: 16),
+                                        //     Text(
+                                        //       serviceProviders[widget.index]
+                                        //           .serviceProviders[index]
+                                        //           .star,
+                                        //       style: TextStyle(
+                                        //           fontWeight: FontWeight.bold,
+                                        //           fontSize: 16),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                      ],
+                                    ),
+                                    Space(16),
+                                    Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            SizedBox(),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Php ${filteredList[index].pricePerDay}",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w900,
+                                                          fontSize: 20),
+                                                    ),
+                                                    Text(
+                                                      "/day ",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w900,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Space(8),
+                                                ElevatedButton(
+                                                  child: Text("Book",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                  onPressed: () {
+                                                    // Navigator.push(
+                                                    //   context,
+                                                    //   MaterialPageRoute(
+                                                    //     builder: (context) =>
+                                                    //         ProviderServicesScreen(
+                                                    //             serviceIndex:
+                                                    //                 widget.index,
+                                                    //             index: index),
+                                                    //   ),
+                                                    // );
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: StadiumBorder(),
+                                                    backgroundColor: appData
+                                                            .isDark
+                                                        ? Colors.grey
+                                                            .withOpacity(0.2)
+                                                        : Colors.black,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 16,
+                                                            horizontal: 32),
+                                                    fixedSize: Size(140, 50),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                );
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  // Handle error state
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  );
+                } else {
+                  // Show loading indicator while waiting for data to load
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
               },
             ),
           ),

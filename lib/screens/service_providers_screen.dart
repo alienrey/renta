@@ -19,15 +19,15 @@ class ServiceProvidersScreen extends StatefulWidget {
 
 class _ServiceProvidersScreenState extends State<ServiceProvidersScreen> {
   Future<void> _navigateToProviderDetailScreen(int index) async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProviderDetailScreen(serviceIndex: widget.index, index: index),
-      ),
-    );
-    if (result) {
-      setState(() {});
-    }
+    // final result = await Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => ProviderDetailScreen(serviceIndex: widget.index, index: index),
+    //   ),
+    // );
+    // if (result) {
+    //   setState(() {});
+    // }
   }
 
   @override
