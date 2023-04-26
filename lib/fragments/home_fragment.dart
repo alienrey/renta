@@ -107,6 +107,11 @@ class _HomeFragmentState extends State<HomeFragment> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: Text(
+          "Home",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+        ),
         backgroundColor: transparent,
         iconTheme: IconThemeData(size: 30),
         actions: [

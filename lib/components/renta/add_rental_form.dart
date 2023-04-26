@@ -1,12 +1,18 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:renta/custom_widget/space.dart';
 import 'package:renta/main.dart';
+import 'package:renta/models/renta/Rentals.dart';
+import 'package:renta/services/authentication.dart';
 import 'package:renta/utils/colors.dart';
 import 'package:renta/utils/images.dart';
 import 'package:renta/utils/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AddProductForm extends StatefulWidget {
   @override
@@ -173,6 +179,44 @@ Future<void> _pickImage() async {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
+
+                  // String id;
+                  // String name;
+                  // String description;
+                  // double pricePerDay;
+                  // String ownerId;
+                  // bool isRented;
+                  // String photoLink;
+
+                  context.loaderOverlay.show();
+
+                  FirebaseRentalService().createRental({
+                    "name": _name,
+                    "description": _description,
+                    "pricePerDay": _pricePerDay,
+                    "ownerId": FirebaseAuthService.getCurrentUserId(),
+                    "isRented": false,
+                    "photoLink": "https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-14-Pro-iPhone-14-Pro-Max-hero-220907_Full-Bleed-Image.jpg.xlarge.jpg"
+                  }).then((value) => {
+                    context.loaderOverlay.hide(),
+                    FirebaseRentalService().getAllRentals().then((value) => {print(value.toString())}),
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      const CustomSnackBar.success(
+                        message:
+                            'Listing successfully created!',
+                      ),
+                    ),
+                  }).onError((error, stackTrace) => {
+                    context.loaderOverlay.show(),
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      const CustomSnackBar.error(
+                        message:
+                            'Failed to create listing!',
+                      ),
+                    ),
+                  });
                   // Perform form submission here
                   // Upload image using _image file
                 }

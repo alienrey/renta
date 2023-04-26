@@ -3,11 +3,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirebaseRentalService {
   final CollectionReference rentalsCollection =
       FirebaseFirestore.instance.collection('rentals');
+  
 
 
-  Future<void> createRental(Rental rental) async {
+    Future<List<Rental>> getAllRentals() async {
     try {
-      await rentalsCollection.doc(rental.id).set(rental.toMap());
+      final rentalsQuerySnapshot = await rentalsCollection.get();
+      final rentalDocs = rentalsQuerySnapshot.docs;
+      final rentals = rentalDocs.map((doc) => Rental.fromMap(doc.data() as Map<String, dynamic>)).toList();
+      return rentals;
+    } catch (e) {
+      print('Error getting rentals: $e');
+      throw e;
+    }
+  }
+
+  Future<void> createRental(Map<String, dynamic> data) async {
+    try {
+      DocumentReference doc = await rentalsCollection.add(data);
+      await doc.set({...data, "id": doc.id});
     } catch (e) {
       print('Error creating rental: $e');
       throw e;
@@ -58,6 +72,11 @@ class Rental {
       'isRented': isRented,
       'photoLink': photoLink,
     };
+  }
+
+  @override
+  String toString() {
+    return 'Rental{id: $id, name: $name, description: $description, pricePerDay: $pricePerDay, ownerId: $ownerId, isRented: $isRented, photoLink: $photoLink}';
   }
 }
 
