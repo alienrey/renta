@@ -24,29 +24,29 @@ import '../models/services_model.dart';
 import '../utils/colors.dart';
 import 'order_summery_screen.dart';
 
-class ServiceScreen extends StatefulWidget {
+class ListingDetailsScreen extends StatefulWidget {
   final int index;
   final bool fromRenovate;
   final bool fromBooking;
   final int serviceIndex;
   final int providerIndex;
-  final String itemId;
+  final Booking booking;
 
-  const ServiceScreen(
+  const ListingDetailsScreen(
       {Key? key,
       this.index = 0,
       this.fromRenovate = false,
       this.fromBooking = false,
       this.serviceIndex = 0,
       this.providerIndex = 0,
-      required this.itemId})
+      required this.booking})
       : super(key: key);
 
   @override
-  State<ServiceScreen> createState() => _ServiceScreenState();
+  State<ListingDetailsScreen> createState() => _ListingDetailsScreenState();
 }
 
-class _ServiceScreenState extends State<ServiceScreen> {
+class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
   List<DateTime> currentMonthList = [];
 
   DateTime currentDateTime = DateTime.now();
@@ -204,38 +204,39 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           MediaQuery.of(context).size.height * 0.06),
                       shape: StadiumBorder(),
                     ),
-                    child: Text("Book"),
+                    child: Text("Confirm"),
                     onPressed: () {
                       context.loaderOverlay.show();
-                      FirebaseBookingService()
-                          .addBooking({
-                            'itemId': widget.itemId,
-                            'renterId': FirebaseAuthService.getCurrentUserId(),
-                            'rentDate': new DateTime.now().toIso8601String(),
-                            'returnDate': new DateTime.now().toIso8601String(),
-                            'bookingStatus': pending,
-                            'isCompleted': false,
-                            'item': rentalItem!.toMap(),
-                            'extraCharges': 0.toDouble(),
-                          })
-                          .then((value) => {
-                                context.loaderOverlay.hide(),
-                                showTopSnackBar(
-                                  Overlay.of(context),
-                                  const CustomSnackBar.success(
-                                    message: 'Item has been booked for rent!',
-                                  ),
-                                ),
-                              })
-                          .onError((error, stackTrace) => {
-                                context.loaderOverlay.hide(),
-                                showTopSnackBar(
-                                  Overlay.of(context),
-                                  const CustomSnackBar.error(
-                                    message: 'Failed to book item!',
-                                  ),
-                                ),
-                              });
+                      // TODO: handleChange status and rentDate
+                      // FirebaseBookingService()
+                      //     .addBooking({
+                      //       'itemId': widget.itemId,
+                      //       'renterId': FirebaseAuthService.getCurrentUserId(),
+                      //       'rentDate': new DateTime.now().toIso8601String(),
+                      //       'returnDate': new DateTime.now().toIso8601String(),
+                      //       'bookingStatus': pending,
+                      //       'isCompleted': false,
+                      //       'item': rentalItem!.toMap(),
+                      //       'extraCharges': 0.toDouble(),
+                      //     })
+                      //     .then((value) => {
+                      //           context.loaderOverlay.hide(),
+                      //           showTopSnackBar(
+                      //             Overlay.of(context),
+                      //             const CustomSnackBar.success(
+                      //               message: 'Item has been booked for rent!',
+                      //             ),
+                      //           ),
+                      //         })
+                      //     .onError((error, stackTrace) => {
+                      //           context.loaderOverlay.hide(),
+                      //           showTopSnackBar(
+                      //             Overlay.of(context),
+                      //             const CustomSnackBar.error(
+                      //               message: 'Failed to book item!',
+                      //             ),
+                      //           ),
+                      //         });
                       // Navigator.push(
                       //   context,
                       //   MaterialPageRoute(

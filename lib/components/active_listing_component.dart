@@ -4,15 +4,16 @@ import 'package:renta/main.dart';
 import 'package:renta/models/active_bookings_model.dart';
 import 'package:renta/models/renta/Booking.dart';
 import 'package:renta/screens/cancel_booking_screen.dart';
+import 'package:renta/screens/service_screen.dart';
 import 'package:renta/utils/colors.dart';
 import 'package:renta/utils/images.dart';
 
-class ActiveBookingComponent extends StatelessWidget {
+class ActiveListingComponent extends StatelessWidget {
   // final ActiveBookingsModel? activeBookingsModel;
   // final int index;
   final Booking? booking;
 
-  ActiveBookingComponent({this.booking});
+  ActiveListingComponent({this.booking});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ActiveBookingComponent extends StatelessWidget {
       onTap: () {
         // Navigator.push(
         //   context,
-        //   MaterialPageRoute(builder: (context) => CancelBookingScreen(activeId: index)),
+        //   MaterialPageRoute(builder: (context) => ListingDet(itemId: booking!.itemId,)),
         // );
       },
       child: Padding(
@@ -96,7 +97,7 @@ class ActiveBookingComponent extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Due Balance: ₹${booking!.extraCharges}",
+                    "To Collect: ₹${booking!.extraCharges}",
                     textAlign: TextAlign.end,
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                   ),

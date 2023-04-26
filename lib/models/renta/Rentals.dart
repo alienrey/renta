@@ -4,9 +4,7 @@ class FirebaseRentalService {
   final CollectionReference rentalsCollection =
       FirebaseFirestore.instance.collection('rentals');
   
-
-
-    Future<List<Rental>> getAllRentals() async {
+  Future<List<Rental>> getAllRentals() async {
     try {
       final rentalsQuerySnapshot = await rentalsCollection.get();
       final rentalDocs = rentalsQuerySnapshot.docs;
@@ -32,7 +30,7 @@ class FirebaseRentalService {
     try {
       final rentalDoc = await rentalsCollection.doc(rentalId).get();
       final rentalData = rentalDoc.data() as Map<String, dynamic>;
-      
+
       return Rental.fromMap({...rentalData, 'id': rentalDoc.id});
     } catch (e) {
       print('Error getting rental: $e');

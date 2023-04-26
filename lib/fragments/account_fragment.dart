@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:renta/fragments/bookings_fragment.dart';
+import 'package:renta/fragments/listings_fragment.dart';
 import 'package:renta/main.dart';
 import 'package:renta/models/customer_details_model.dart';
 import 'package:renta/screens/favourite_services_screen.dart';
@@ -140,14 +141,27 @@ class _AccountFragmentState extends State<AccountFragment> {
             ListTile(
               horizontalTitleGap: 4,
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
-              leading: Icon(Icons.calendar_month, size: 20),
-              title: Text("My Rentals"),
+              leading: Icon(Icons.list_alt, size: 20),
+              title: Text("My Rents"),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
                             BookingsFragment(fromProfile: true)));
+              },
+            ),
+            ListTile(
+              horizontalTitleGap: 4,
+              contentPadding: EdgeInsets.symmetric(horizontal: 16),
+              leading: Icon(Icons.storage, size: 20),
+              title: Text("My Listings"),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ListingsFragment(fromProfile: true)));
               },
             ),
             // ListTile(

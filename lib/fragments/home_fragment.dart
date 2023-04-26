@@ -102,6 +102,8 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     aspectRatio = MediaQuery.of(context).size.aspectRatio;
@@ -254,7 +256,9 @@ class _HomeFragmentState extends State<HomeFragment> {
             padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
             child: Form(
               child: TextFormField(
+                controller: _searchController,
                 keyboardType: TextInputType.name,
+                onChanged: (value) => setState(() {}),
                 style: TextStyle(fontSize: 17),
                 decoration: commonInputDecoration(
                   hintText: "Search for services",
@@ -269,8 +273,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               builder:
                   (BuildContext context, AsyncSnapshot<List<Rental>> snapshot) {
                 if (snapshot.hasData) {
-
-                  final filteredList = snapshot.data?.where((element) => element.ownerId != FirebaseAuthService.getCurrentUserId()).toList();
+                  final filteredList = snapshot.data?.where((rental) => rental.name.toLowerCase().contains(_searchController.text.toLowerCase())).where((element) => element.ownerId != FirebaseAuthService.getCurrentUserId()).toList();
                   
                   if(filteredList!.isEmpty){
                     return Center(
@@ -309,7 +312,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                     child: Image.network(
                                       filteredList[index].photoLink,
                                       width: 100,
-                                      height: 150,
+                                      height: 100,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -367,13 +370,35 @@ class _HomeFragmentState extends State<HomeFragment> {
                                               fontSize: 20),
                                         ),
                                         Space(4),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Php ${filteredList[index].pricePerDay}",
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.w700,
+                                                  fontSize: 16),
+                                            ),
+                                            Text(
+                                              "/day ",
+                                              textAlign:
+                                                  TextAlign.start,
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.w700,
+                                                  fontSize: 16),
+                                            ),
+                                          ],
+                                        ),
+                                        Space(4),
                                         Text(
                                           filteredList[index].description,
                                           overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
+                                          maxLines: 3,
                                           textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              color: greyColor, fontSize: 14),
+                                          style: TextStyle(fontSize: 14),
                                         ),
                                         Space(4),
                                         // Row(
@@ -392,84 +417,84 @@ class _HomeFragmentState extends State<HomeFragment> {
                                         // ),
                                       ],
                                     ),
-                                    Space(16),
-                                    Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            SizedBox(),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Php ${filteredList[index].pricePerDay}",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w900,
-                                                          fontSize: 20),
-                                                    ),
-                                                    Text(
-                                                      "/day ",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w900,
-                                                          fontSize: 14),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Space(8),
-                                                ElevatedButton(
-                                                  child: Text("Book",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: Colors.white)),
-                                                  onPressed: () {
-                                                    // Navigator.push(
-                                                    //   context,
-                                                    //   MaterialPageRoute(
-                                                    //     builder: (context) =>
-                                                    //         ProviderServicesScreen(
-                                                    //             serviceIndex:
-                                                    //                 widget.index,
-                                                    //             index: index),
-                                                    //   ),
-                                                    // );
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape: StadiumBorder(),
-                                                    backgroundColor: appData
-                                                            .isDark
-                                                        ? Colors.grey
-                                                            .withOpacity(0.2)
-                                                        : Colors.black,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 16,
-                                                            horizontal: 32),
-                                                    fixedSize: Size(140, 50),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                    // Space(16),
+                                    // Column(
+                                    //   children: [
+                                    //     Row(
+                                    //       mainAxisAlignment:
+                                    //           MainAxisAlignment.spaceBetween,
+                                    //       crossAxisAlignment:
+                                    //           CrossAxisAlignment.end,
+                                    //       children: [
+                                    //         SizedBox(),
+                                    //         Column(
+                                    //           mainAxisAlignment:
+                                    //               MainAxisAlignment.end,
+                                    //           crossAxisAlignment:
+                                    //               CrossAxisAlignment.end,
+                                    //           children: [
+                                    //             Row(
+                                    //               crossAxisAlignment:
+                                    //                   CrossAxisAlignment.center,
+                                    //               children: [
+                                    //                 Text(
+                                    //                   "Php ${filteredList[index].pricePerDay}",
+                                    //                   style: TextStyle(
+                                    //                       fontWeight:
+                                    //                           FontWeight.w900,
+                                    //                       fontSize: 20),
+                                    //                 ),
+                                    //                 Text(
+                                    //                   "/day ",
+                                    //                   textAlign:
+                                    //                       TextAlign.start,
+                                    //                   style: TextStyle(
+                                    //                       fontWeight:
+                                    //                           FontWeight.w900,
+                                    //                       fontSize: 14),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //             Space(8),
+                                    //             ElevatedButton(
+                                    //               child: Text("Book",
+                                    //                   textAlign:
+                                    //                       TextAlign.center,
+                                    //                   style: TextStyle(
+                                    //                       color: Colors.white)),
+                                    //               onPressed: () {
+                                    //                 // Navigator.push(
+                                    //                 //   context,
+                                    //                 //   MaterialPageRoute(
+                                    //                 //     builder: (context) =>
+                                    //                 //         ProviderServicesScreen(
+                                    //                 //             serviceIndex:
+                                    //                 //                 widget.index,
+                                    //                 //             index: index),
+                                    //                 //   ),
+                                    //                 // );
+                                    //               },
+                                    //               style:
+                                    //                   ElevatedButton.styleFrom(
+                                    //                 shape: StadiumBorder(),
+                                    //                 backgroundColor: appData
+                                    //                         .isDark
+                                    //                     ? Colors.grey
+                                    //                         .withOpacity(0.2)
+                                    //                     : Colors.black,
+                                    //                 padding:
+                                    //                     EdgeInsets.symmetric(
+                                    //                         vertical: 16,
+                                    //                         horizontal: 32),
+                                    //                 fixedSize: Size(140, 50),
+                                    //               ),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //   ],
+                                    // ),
                                   ],
                                 ),
                               ),

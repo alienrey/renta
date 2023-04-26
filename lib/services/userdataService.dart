@@ -10,13 +10,10 @@ class FirebaseUserService {
     return _auth.currentUser;
   }
 
-  Future<UserData?> getUserData(String uid) async {
+  Future<UserData> getUserData(String uid) async {
     DocumentSnapshot doc = await _db.collection('users').doc(uid).get();
-    if (doc.exists) {
-      return UserData.fromDocumentSnapshot(doc);
-    } else {
-      return null;
-    }
+    print(doc.data());
+    return UserData.fromDocumentSnapshot(doc);
   }
 
   Future<void> updateUserData(String uid, UserData data) async {

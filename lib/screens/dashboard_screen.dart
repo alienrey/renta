@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:renta/fragments/account_fragment.dart';
 import 'package:renta/fragments/bookings_fragment.dart';
 import 'package:renta/fragments/home_fragment.dart';
+import 'package:renta/fragments/listings_fragment.dart';
 import 'package:renta/fragments/search_fragment.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -16,8 +17,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   final _pageItem = [
     HomeFragment(),
-    SearchFragment(),
     BookingsFragment(fromProfile: false),
+    SearchFragment(),
+    ListingsFragment(fromProfile: false),
     AccountFragment(),
   ];
   int _selectedItem = 0;
@@ -58,13 +60,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.list_alt_outlined, size: 20),
+                activeIcon: Icon(Icons.list_alt, size: 20),
+                label: "Rents",
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.create_outlined, size: 20),
                 activeIcon: Icon(Icons.create, size: 20),
                 label: "Create",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.list, size: 20),
-                activeIcon: Icon(Icons.list_outlined, size: 20),
+                icon: Icon(Icons.storage_outlined, size: 20),
+                activeIcon: Icon(Icons.storage, size: 20),
                 label: "Listings",
               ),
               BottomNavigationBarItem(

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:renta/screens/ActiveListings.dart';
 import 'package:renta/screens/active_bookings_screen.dart';
 import 'package:renta/screens/booking_history_screen.dart';
 import 'package:renta/utils/colors.dart';
 
-class BookingsFragment extends StatefulWidget {
+class ListingsFragment extends StatefulWidget {
   final bool fromProfile;
 
-  const BookingsFragment({Key? key, required this.fromProfile}) : super(key: key);
+  const ListingsFragment({Key? key, required this.fromProfile}) : super(key: key);
 
   @override
-  State<BookingsFragment> createState() => _BookingsFragmentState();
+  State<ListingsFragment> createState() => _ListingsFragmentState();
 }
 
-class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerProviderStateMixin {
+class _ListingsFragmentState extends State<ListingsFragment> with SingleTickerProviderStateMixin {
   late TabController bookingTabController = TabController(length: 2, vsync: this, initialIndex: 0);
 
   @override
@@ -39,7 +40,7 @@ class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerPr
           ),
         ),
         title: Text(
-          "Rents",
+          "My Listings",
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
         ),
@@ -48,15 +49,15 @@ class _BookingsFragmentState extends State<BookingsFragment> with SingleTickerPr
           labelStyle: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
           indicatorColor: blackColor,
           tabs: [
-            Tab(text: "Active Rents"),
-            Tab(text: "Rent History"),
+            Tab(text: "Active Listings"),
+            Tab(text: "Listings History"),
           ],
         ),
       ),
       body: TabBarView(
         controller: bookingTabController,
         children: [
-          ActiveBookingsScreen(),
+          ActiveListings(),
           BookingHistoryScreen(),
         ],
       ),

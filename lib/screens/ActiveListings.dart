@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:renta/components/active_booking_component.dart';
-import 'package:renta/models/active_bookings_model.dart';
+import 'package:renta/components/active_listing_component.dart';
 import 'package:renta/models/renta/Booking.dart';
 import 'package:renta/services/BookingService.dart';
 import 'package:renta/utils/constant.dart';
 
-class ActiveBookingsScreen extends StatefulWidget {
-  const ActiveBookingsScreen({Key? key}) : super(key: key);
+class ActiveListings extends StatefulWidget {
+  const ActiveListings({Key? key}) : super(key: key);
 
   @override
-  State<ActiveBookingsScreen> createState() => _ActiveBookingsScreenState();
+  State<ActiveListings> createState() => _ActiveListingsState();
 }
 
-class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
+class _ActiveListingsState extends State<ActiveListings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<Booking>>(
-        future: FirebaseBookingService().getMyBookings(),
+        future: FirebaseBookingService().getMyActiveListings(),
         builder: (BuildContext context, AsyncSnapshot<List<Booking>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -33,13 +33,12 @@ class _ActiveBookingsScreenState extends State<ActiveBookingsScreen> {
               padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 16),
               itemCount: activeRents.length,
               itemBuilder: (BuildContext context, int index) {
-                return ActiveBookingComponent(booking: activeRents[index]);
+                return ActiveListingComponent(booking: activeRents[index]);
               },
             );
           }
         },
       ),
-
     );
   }
 }
