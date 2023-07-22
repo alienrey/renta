@@ -8,7 +8,7 @@ RenTa is a user-friendly mobile application developed using Flutter and Firebase
 
 - **Browse Listings:** Explore a wide range of items available for rent in your area, and filter based on categories and location.
 
-- **Renting Made Simple:** Contact the item owner through the app, negotiate terms, and finalize the rental process effortlessly.
+- **Renting Made Simple:** Contact the item owner through the app and finalize the rental process effortlessly.
 
 ## Tech Stack
 
