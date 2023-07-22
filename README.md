@@ -78,14 +78,6 @@ We welcome contributions from the community to enhance the RenTa app further. If
 
 5. Submit a pull request with a detailed explanation of your changes.
 
-## Feedback and Support
-
-For any feedback, suggestions, or issues related to RenTa, please [open an issue](https://github.com/yourusername/RenTa/issues) on the GitHub repository. We appreciate your input and will do our best to provide timely support.
-
-## License
-
-RenTa is released under the [MIT License](LICENSE). You are free to use, modify, and distribute the app as per the terms of the license.
-
 ---
 
 Thank you for choosing RenTa! We hope you find it useful for renting and sharing items in your community. If you encounter any problems or have any questions, feel free to reach out to us. Happy renting!
