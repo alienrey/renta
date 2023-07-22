@@ -74,7 +74,7 @@ We welcome contributions from the community to enhance the RenTa app further. If
 
 3. Make your changes and ensure that the code is properly formatted.
 
-4. Write tests for new features or bug fixes to maintain code quality.
+4. If you like, you may write tests for new features or bug fixes to maintain code quality.
 
 5. Submit a pull request with a detailed explanation of your changes.
 
